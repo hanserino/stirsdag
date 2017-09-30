@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Er det Stirsdg?</title>
+    <link rel="stylesheet" href="stylesheet.css" type="text/css">
+  </head>
+  <body>
+
+    <div class="wrapper">
+        <h1>Er det Stirsdag?</h1>
+    </div>
+
+
+
+    <script type="text/javascript">
+        
+        let wrapper = document.getElementById("wrapper");
+        
+        function autorun(){
+
+            console.log('hello');
+
+            window.setTimeout(function(){
+                document.body.classList.add('ready');
+            }, 100);
+        }
+
+        if (window.addEventListener) window.addEventListener("load", autorun());
+        else if (window.attachEvent) window.attachEvent("onload", autorun);
+        else window.onload = autorun;
+
+    </script>
+
+
+</body>
+</html>
