@@ -29,6 +29,7 @@
     <script type="text/javascript">
         
         let wrapperEl = document.getElementsByClassName("wrapper")[0];
+        let answerEl = document.getElementById("answer");
 
         let date = new Date(),
             day = date.getDay();
@@ -41,12 +42,15 @@
             return Math.floor(Math.random() * (max - min)) + min;
         }
 
-        function stirsdag(){
-
-        }
-
-        function notStirsdag(){
-
+        const answers = {
+            yes: [
+                "Ja for faen!",
+                "Ja!!!!"
+            ],
+            no: [
+                "Nope. Ta deg en bolle.",
+                "Nei. Men ta deg en tur i marka åkke som da, for faen"
+            ]
         }
 
         function setBackground(number){
@@ -57,10 +61,11 @@
             setBackground(randomInt(1,9));
 
             if (isStirsdag) {
-                stirsdag()
+                answerEl.innerHTML = answers.no[randomInt(0,answers.yes.length)];
             }else{
-                notStirsdag();
-            }   
+                answerEl.innerHTML = answers.no[randomInt(0,answers.no.length)];
+            }
+
         }
 
         if (window.addEventListener) window.addEventListener("load", init());
