@@ -1,0 +1,2 @@
+# stirsdag
+Er det Stirsdag?
