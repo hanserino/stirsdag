@@ -9,26 +9,62 @@
   <body>
 
     <div class="wrapper">
-        <h1>Er det Stirsdag?</h1>
-    </div>
+        <header>
+            <h1 id="question">Er det Stirsdag?</h1>
+            <h2 id="answer"></h2>
+        </header>
+        
+        <div class="main">
+            
 
+        </div>
+
+        <footer>
+            <p>Footer</p>
+        </footer>
+
+    </div>
 
 
     <script type="text/javascript">
         
-        let wrapper = document.getElementById("wrapper");
+        let wrapperEl = document.getElementsByClassName("wrapper")[0];
+
+        let date = new Date(),
+            day = date.getDay();
         
-        function autorun(){
+        let isStirsdag = day === 6 ? true : false;
 
-            console.log('hello');
-
-            window.setTimeout(function(){
-                document.body.classList.add('ready');
-            }, 100);
+        function randomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
         }
 
-        if (window.addEventListener) window.addEventListener("load", autorun());
-        else if (window.attachEvent) window.attachEvent("onload", autorun);
+        function stirsdag(){
+
+        }
+
+        function notStirsdag(){
+
+        }
+
+        function setBackground(number){
+            wrapperEl.style.background = 'url(media/pics/'+number+'.jpg) no-repeat';
+        }
+
+        function init(){
+            setBackground(randomInt(1,9));
+
+            if (isStirsdag) {
+                stirsdag()
+            }else{
+                notStirsdag();
+            }   
+        }
+
+        if (window.addEventListener) window.addEventListener("load", init());
+        else if (window.attachEvent) window.attachEvent("onload", init);
         else window.onload = autorun;
 
     </script>

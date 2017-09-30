@@ -1,3 +1,48 @@
+html, body, div, span,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, img,
+small,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas,
+figure, figcaption, footer, header, 
+nav, output, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+
 body{
-    background: grey;
+    background: white;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.wrapper{
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+}
+
+#question{
+    color: white;
+    font-size: 10rem;
 }
