@@ -3,38 +3,52 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Er det Stirsdg?</title>
+    <title>Stirsdag - run sti get high!</title>
+    <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
     <link rel="stylesheet" href="stylesheet.css" type="text/css">
   </head>
   <body>
+      <main class="wrapper">
 
-    <div class="wrapper">
-        <header>
-            <h1 id="question">Er det Stirsdag?</h1>
-            <h2 id="answer"></h2>
-        </header>
-        
-        <div class="main">
-            
+        <section class="section textOnPic" id="first" data-stirsdag="">
+            <h1 id="isitQuestion">Er det Stirsdag idag?</h1>
+            <p id="isitAnswer"></p>
+        </section>
 
-        </div>
+        <section class="section animBg" id="second">
+            <h1 id="whenQuestion">Når er neste Stirsdag da?</h1>
+            <p>På tirsdag, selvfølgelig! <a href="https://www.facebook.com/pg/skyblazersrunning/events/">Meld deg på her</a>.</p>
+        </section>
 
-        <footer>
-            <p>Footer</p>
-        </footer>
+        <section class="section animBg" id="third">
+            <h1>Hva faen er Stirsdag?</h1>
+            <p>Les <a href="https://www.strava.com/athletes/4595507/posts/677173">Hr. Rummelhoffs Strava-post</a>, så får du svaret. </p>
+        </section>
 
-    </div>
-
+        <section class="section animBg" id="fourth">
+            <h1>Hva er egentlig Sky Blazers?</h1>
+            <p>Sky Blazers består av ca 10stk kvinner og menn som rett og slett elsker å løpe og konkurrere i røfft terreng. "Sky" kommer av at vi digger <a href="https://en.wikipedia.org/wiki/Skyrunning">skyrunning</a>. "Less cloud, more sky!", som de sier på fagspråket.</p>
+            <p>Du finner oss i disse kanalene:</p>
+            <ul>
+                <li>Facebook: <a href="https://www.facebook.com/skyblazersrunning/">@skyblazersrunning</a></li>
+                <li>Instagram: <a href="https://www.instagram.com/skyblazersrunning/">@skyblazersrunning</a></li>
+                <li>Strava: <a href="https://www.strava.com/clubs/skyblazers">@skyblazers</a></li>
+            </ul>
+        </section>
+    </main>
 
     <script type="text/javascript">
         
-        let wrapperEl = document.getElementsByClassName("wrapper")[0];
-        let answerEl = document.getElementById("answer");
+        let firstSectionEl = document.getElementById("first");
+        let secondSectionEl = document.getElementById("second");
+        let thirdSectionEl = document.getElementById("third");
+        
+        let isitAnswerEl = document.getElementById("isitAnswer");
 
         let date = new Date(),
             day = date.getDay();
         
-        let isStirsdag = day === 6 ? true : false;
+        let isStirsdag = day === 2 ? true : false;
 
         function randomInt(min, max) {
             min = Math.ceil(min);
@@ -45,25 +59,30 @@
         const answers = {
             yes: [
                 "Ja for faen!",
-                "Ja!!!!"
+                "Fuck yeah!!!",
+                "Hell yeah! Hide yo kids! Hide yo wifes!"
             ],
             no: [
                 "Nope. Ta deg en bolle.",
-                "Nei. Men ta deg en tur i marka åkke som da, for faen"
+                "Nei. Men ta deg en tur i skauen åkke som da, for faen.",
+                "Nei. Kanskje i dag er dagen hvor du skal teste ut HK's famøse <a target='_blank' href='https://medium.com/skyblazers/oppskrift-ultraboller-8eb07c8421ff'>Ultrabolle-oppskrift</a>? 🍪",
+                "Sorry. 😢"
             ]
         }
 
         function setBackground(number){
-            wrapperEl.style.background = 'url(media/pics/'+number+'.jpg) no-repeat';
+            firstSectionEl.style.background = 'url(media/pics/'+number+'.jpg) no-repeat center center';
         }
 
         function init(){
             setBackground(randomInt(1,9));
+            
+            firstSectionEl.setAttribute("data-stirsdag", isStirsdag.toString());
 
             if (isStirsdag) {
-                answerEl.innerHTML = answers.no[randomInt(0,answers.yes.length)];
+                isitAnswerEl.innerHTML = answers.no[randomInt(0,answers.yes.length)];
             }else{
-                answerEl.innerHTML = answers.no[randomInt(0,answers.no.length)];
+                isitAnswerEl.innerHTML = answers.no[randomInt(0,answers.no.length)];
             }
 
         }
@@ -73,7 +92,6 @@
         else window.onload = autorun;
 
     </script>
-
 
 </body>
 </html>

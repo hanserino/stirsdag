@@ -27,26 +27,116 @@ html {
 
 
 body{
-    background: white;
-    position: absolute;
-    height: 100%;
-    width: 100%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 100%;
+    line-height: 1.2;
 }
 
-.wrapper{
-    background-size: cover;
-    background-position: center;
+h1{
+    font-size: 5rem;
+    margin: 0 0 2rem 0;
+    font-family: 'Bungee Shade', cursive; 
+}
+
+p, ul{
+    font-size: 1.5rem;
+}
+p{
+    margin: 1rem 0;
+}
+ul{
+    padding: 0 0 0 20px;
+}
+li{
+    margin: .5rem 0;
+}
+a{
+    color: inherit;
+}
+a:hover{
+    background: black;
+    color: white;
+}
+
+.section{
+    min-height: 100vh;
+    padding: 2rem;  
     display: flex;
-    width: 100%;
-    height: 100%;
-    padding: 2rem;
+    flex-direction: column;
+    align-content: center;  
 }
 
-#question{
-    color: white;
-    font-size: 5rem;
+
+/**
+* FIRST SECTION
+*/
+
+#first{
+    background-size: contain;
 }
-#answer{
-    font-size: 5rem;
+
+
+.textOnPic {
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
     color: white;
+}
+
+.textOnPic::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.25);
+    z-index: 0;
+}
+
+#first *{
+    position: relative;
+    z-index: 1;
+}
+
+/* IN CASE OF STIRSDAG! */
+[data-stirsdag="true"] #isitAnswer{
+    animation: blinker .2s linear infinite;
+}
+
+
+/**
+* SECOND SECTION
+*/
+#second{
+
+}
+
+.animBg{
+    background: white;
+    animation: animBg 20s infinite reverse;
+}
+
+.animBg:nth-child(2){
+    animation-delay: -1s;
+}
+.animBg:nth-child(3){
+    animation-delay: 2s;
+}
+.animBg:nth-child(4){
+    animation-delay: 4s;
+}
+
+.animBg:nth-child(even){
+    animation-direction: alternate-reverse;    
+}
+
+@keyframes animBg {
+    15% { background-color: rgba(255, 0, 0, 0.2); } 
+    30% { background-color: rgba(255, 255, 0, 0.2); } 
+    45% { background-color: rgba(0, 128, 0, 0.2); } 
+    60% { background-color: rgba(0, 0, 255, 0.2); }
+    75% { background-color: white; }
+}
+
+@keyframes blinker {  
+    50% { opacity: 0; }
 }
