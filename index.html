@@ -16,7 +16,7 @@
         </section>
 
         <section class="section animBg" id="second">
-            <h1 id="whenQuestion">Når er neste Stirsdag da?</h1>
+            <h1 id="whenQuestion">Når er neste Stirsdag?</h1>
             <p>På tirsdag, selvfølgelig! <a href="https://www.facebook.com/pg/skyblazersrunning/events/">Meld deg på her</a>.</p>
         </section>
 
@@ -34,6 +34,16 @@
                 <li>Instagram: <a href="https://www.instagram.com/skyblazersrunning/">@skyblazersrunning</a></li>
                 <li>Strava: <a href="https://www.strava.com/clubs/skyblazers">@skyblazers</a></li>
             </ul>
+        </section>
+
+        <section class="section animBg" id="fourth">
+            <h1>Vi løpes! </h1>
+            <p>Hilsen Sky Blazers & Co.</p>
+            <div class="logo-container">
+                <div class="logo-container__inner">
+                    <img class="logo" src="media/skyblazerslogo.png" alt="Sky Blazers logo" />
+                </div>
+            </div>
         </section>
     </main>
 
@@ -58,15 +68,13 @@
 
         const answers = {
             yes: [
-                "Ja for faen!",
-                "Fuck yeah!!!",
-                "Hell yeah! Hide yo kids! Hide yo wifes!"
+                "Ja for faen! Vi ses på <a href='https://goo.gl/maps/cuhG4nfLZtM2'>Disen Trikkestopp</a> kl 17:50!",
+                "Fuck yeah! Vi ses på <a href='https://goo.gl/maps/cuhG4nfLZtM2'>Disen Trikkestopp</a> kl 17:50!"
             ],
             no: [
                 "Nope. Ta deg en bolle.",
                 "Nei. Men ta deg en tur i skauen åkke som da, for faen.",
-                "Nei. Kanskje i dag er dagen hvor du skal teste ut HK's famøse <a target='_blank' href='https://medium.com/skyblazers/oppskrift-ultraboller-8eb07c8421ff'>Ultrabolle-oppskrift</a>? 🍪",
-                "Sorry. 😢"
+                "Nei. Kanskje i dag er dagen hvor du skal teste ut HK's famøse <a target='_blank' href='https://medium.com/skyblazers/oppskrift-ultraboller-8eb07c8421ff'>Ultrabolle-oppskrift</a>? 🍪"
             ]
         }
 
@@ -75,16 +83,15 @@
         }
 
         function init(){
-            setBackground(randomInt(1,9));
+            setBackground(randomInt(1,15));
             
             firstSectionEl.setAttribute("data-stirsdag", isStirsdag.toString());
 
             if (isStirsdag) {
-                isitAnswerEl.innerHTML = answers.no[randomInt(0,answers.yes.length)];
+                isitAnswerEl.innerHTML = answers.yes[randomInt(0,answers.yes.length)];
             }else{
                 isitAnswerEl.innerHTML = answers.no[randomInt(0,answers.no.length)];
             }
-
         }
 
         if (window.addEventListener) window.addEventListener("load", init());
