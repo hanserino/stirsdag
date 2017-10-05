@@ -79,11 +79,11 @@
         }
 
         function setBackground(number){
-            firstSectionEl.style.background = 'url(media/pics/'+number+'.jpg) no-repeat center center';
+            firstSectionEl.style.backgroundImage = 'url(media/pics/'+number+'.jpg)';
         }
 
         function init(){
-            setBackground(randomInt(1,15));
+            setBackground(randomInt(1,14));
             
             firstSectionEl.setAttribute("data-stirsdag", isStirsdag.toString());
 

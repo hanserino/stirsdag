@@ -84,12 +84,12 @@ a:hover{
 }
 @media (min-width: 600px){
     .section {
-        padding: 1rem;
+        padding: 2rem;
     }
 }
 @media (min-width: 900px){
     .section {
-        padding: 2rem;
+        padding: 3rem;
     }
 }
 
@@ -98,7 +98,9 @@ a:hover{
 */
 
 #first{
-    background-size: contain;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
 }
 
 
