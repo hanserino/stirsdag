@@ -9,7 +9,7 @@
     <meta property="og:description" content="Stirsdag med Sky Blazers. 12-16km stiløping hver tirsdag kl 18:00 fra Disen trikkestasjon."/>
     <meta property="og:image" content="media/pics/10.jpg">
     <meta property="og:url" content="http://stirsdag.no/">
-    
+
     <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
     <link rel="stylesheet" href="stylesheet.css" type="text/css">
   </head>
@@ -21,14 +21,27 @@
             <p id="isitAnswer"></p>
         </section>
 
-        <section class="section animBg" id="second">
-            <h1 id="whenQuestion">Når er neste Stirsdag?</h1>
-            <p>På tirsdag, selvfølgelig! <a href="https://www.facebook.com/pg/skyblazersrunning/events/">Meld deg på her</a>.</p>
-        </section>
-
         <section class="section animBg" id="third">
             <h1>Hva faen er Stirsdag?</h1>
             <p>Les <a href="https://www.strava.com/athletes/4595507/posts/677173">Hr. Rummelhoffs Strava-post</a>, så får du svaret. </p>
+        </section>
+
+        <section class="section animBg" id="clothes">
+            <h1>Hva skal jeg ha med meg?</h1>
+            <p>Basert på vår super-hemmelige Stirsdags-algoritme, har vi kommet opp med følgende tabell for førstkommende Stirsdag:</p>
+            
+            <table id="gearTable">
+                <tr>
+                    <th>Plagg/utstyr</th>
+                    <th>God idé?</th>
+                    <th>Det kan ikke skade</th>
+                </tr>
+                <tbody id="gearTableBody">
+
+                </tbody>
+            
+            </table>
+
         </section>
 
         <section class="section animBg" id="fourth">
@@ -52,19 +65,31 @@
             </div>
         </section>
     </main>
-
+    <script src="moment.js"></script>
     <script type="text/javascript">
-        
+
         let firstSectionEl = document.getElementById("first");
         let secondSectionEl = document.getElementById("second");
         let thirdSectionEl = document.getElementById("third");
         
         let isitAnswerEl = document.getElementById("isitAnswer");
 
+        let degreesEl = document.getElementById("degrees");
+        let gearTableBody = document.getElementById("gearTableBody");
+
+        let forecast = {
+            "data": {}
+        };
+
+
+        let forecastUrl = 'http://yr.no/api/v0/locations/1-73569/forecast';
+
         let date = new Date(),
             day = date.getDay();
         
         let isStirsdag = day === 2 ? true : false;
+
+        let daysUntilStirsdag = 7-day+2;
 
         function randomInt(min, max) {
             min = Math.ceil(min);
@@ -88,7 +113,50 @@
             firstSectionEl.style.backgroundImage = 'url(media/pics/'+number+'.jpg)';
         }
 
+        function weatherRow(item, goodIdea, whyNot){
+
+            let goodIdeaEmoji = goodIdea ? '👍' : '👎';
+            let whyNotEmoji = whyNot ? '👍' : '👎';
+
+
+            return `<tr>
+                        <td>${item}</td>
+                        <td>${goodIdeaEmoji}</td>
+                        <td>${whyNotEmoji}</td>
+                    </tr>`;
+        }
+
         function init(){
+
+            //Getting some yr.no data
+            fetch(forecastUrl).then(function (response) {
+                return response.json().then(function (data) {
+                    forecast.data = data;
+
+                    //Todo: get the yrInterval to hit midday inteval
+                    let yrInterval = 4*daysUntilStirsdag;
+                    let stirsdagWeather = forecast.data.longIntervals[yrInterval];
+
+                    let willItRain = stirsdagWeather.precipitation > 0 ? true : false;
+                    let willItBeCold = stirsdagWeather.feelsLike.value < 5 ? true : false;
+                    let willitBeSuperCold = stirsdagWeather.temperature.value < -1 ? true : false;
+
+                    console.log(stirsdagWeather);
+                    
+                    gearTableBody.innerHTML += weatherRow('Regntøy', willItRain, willItRain);
+                    gearTableBody.innerHTML += weatherRow('Varme klær', willItBeCold, willItBeCold);
+                    gearTableBody.innerHTML += weatherRow('Terrengsko', true, true);
+                    gearTableBody.innerHTML += weatherRow('Hodelykt', true, true);
+                    gearTableBody.innerHTML += weatherRow('Piggsko', willitBeSuperCold, willitBeSuperCold);
+                    gearTableBody.innerHTML += weatherRow('Solbriller', false, false);
+                    gearTableBody.innerHTML += weatherRow('Godt humør', true, true);
+
+                });
+            }).catch(error => {
+                console.log(error);
+                gearTableBody.innerHTML = `<tr><td>Noe gikk galt..</td><td></td><td></td></tr>`;
+            });
+
             setBackground(randomInt(1,14));
             
             firstSectionEl.setAttribute("data-stirsdag", isStirsdag.toString());
@@ -96,7 +164,11 @@
             if (isStirsdag) {
                 isitAnswerEl.innerHTML = answers.yes[randomInt(0,answers.yes.length)];
             }else{
-                isitAnswerEl.innerHTML = answers.no[randomInt(0,answers.no.length)];
+                //isitAnswerEl.innerHTML = answers.no[randomInt(0,answers.no.length)];
+                isitAnswerEl.innerHTML = `
+                    Nei, i dag er det bare vanlig ${moment().locale('nb').format('dddd')} 🤣. <br>
+                    Neste Stirsdag er tirsdag ${moment().locale('nb').day(9).format('Do MMMM')}.
+                    <a href="https://www.facebook.com/pg/skyblazersrunning/events/">Meld deg på her</a>.`;
             }
         }
 

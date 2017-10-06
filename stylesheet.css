@@ -19,6 +19,7 @@ time, mark, audio, video {
 }
 html {
     box-sizing: border-box;
+    font-size: 100%;
 }
 
 *, *:before, *:after {
@@ -30,17 +31,16 @@ body{
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 100%;
     line-height: 1.2;
+    font-size: 1.3rem;
 }
 
 h1{
     font-family: 'Bungee Shade', cursive; 
-    font-size: 2.5rem;
+    font-size: 3rem;
     margin: 0 0 1rem 0;
 }
 
-p, ul{
-    font-size: 1.25rem;
-}
+
 p{
     margin: 1rem 0;
 }
@@ -56,11 +56,11 @@ a{
 
 @media (min-width: 600px){
     h1{
-        font-size: 3rem;
+        font-size: 4rem;
         margin: 0 0 2rem 0;
     }
-    p, ul{
-        font-size: 1.5rem;
+    body {
+        font-size: 1.4rem;
     }
 }
 
@@ -196,4 +196,26 @@ a:hover{
 
 @keyframes blinker {  
     50% { opacity: 0; }
+}
+
+
+
+table{
+    margin: 1rem 0;
+    width: 100%;
+    border-collapse: collapse; 
+    border-spacing: 0;
+}
+th,td{
+    height: 2.5rem;
+    vertical-align: middle;
+    border: 1px solid rgba(0,0,0,.1);
+}
+th {  
+    font-weight: bold;
+}
+
+td {  
+    background: transparent;
+    text-align: center;
 }
