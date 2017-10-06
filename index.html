@@ -16,17 +16,25 @@
   <body>
       <main class="wrapper">
  
-        <section class="section textOnPic" id="first" data-stirsdag="">
+        <header class="section textOnPic" id="header" data-stirsdag="">
             <h1 id="isitQuestion">Er det Stirsdag idag?</h1>
             <p id="isitAnswer"></p>
-        </section>
 
-        <section class="section animBg" id="third">
+            <nav class="nav">
+                <ul>
+                    <li><a href="#hva-faen-er-stirsdag">Hva faen er Stirsdag?</a></li>
+                    <li><a href="#utstyr">Hva har man med seg på Stirsdag?</a></li>
+                    <li><a href="#hvem-staar-bak">Hvem står bak Stirsdag?</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="section animBg" id="hva-faen-er-stirsdag">
             <h1>Hva faen er Stirsdag?</h1>
             <p>Les <a href="https://www.strava.com/athletes/4595507/posts/677173">Hr. Rummelhoffs Strava-post</a>, så får du svaret. </p>
         </section>
 
-        <section class="section animBg" id="clothes">
+        <section class="section animBg" id="utstyr">
             <h1>Hva skal jeg ha med meg?</h1>
             <p>Basert på vår super-hemmelige Stirsdags-algoritme, har vi kommet opp med følgende tabell for førstkommende Stirsdag:</p>
             
@@ -34,8 +42,8 @@
                 <tr>
                     <th>Plagg/utstyr</th>
                     <th>God idé?</th>
-                    <th>Det kan ikke skade</th>
                 </tr>
+
                 <tbody id="gearTableBody">
 
                 </tbody>
@@ -44,9 +52,9 @@
 
         </section>
 
-        <section class="section animBg" id="fourth">
-            <h1>Hva er egentlig Sky Blazers?</h1>
-            <p>Sky Blazers består av ca 10stk kvinner og menn som rett og slett elsker å løpe og konkurrere i røfft terreng. "Sky" kommer av at vi digger <a href="https://en.wikipedia.org/wiki/Skyrunning">skyrunning</a>. "Less cloud, more sky!", som de sier på fagspråket.</p>
+        <section class="section animBg" id="hva-er-sky-blazers">
+            <h1>Hvem står bak Stirsdag?</h1>
+            <p>Stirsdag er et initiativ av løpecrewet Sky Blazers. Vi består av ca 10stk kvinner og menn som rett og slett elsker å løpe og konkurrere i røfft terreng. "Sky" kommer av at vi digger <a href="https://en.wikipedia.org/wiki/Skyrunning">skyrunning</a>. "Less cloud, more sky!", som de sier på fagspråket.</p>
             <p>Du finner oss i disse kanalene:</p>
             <ul>
                 <li>Facebook: <a href="https://www.facebook.com/skyblazersrunning/">@skyblazersrunning</a></li>
@@ -55,7 +63,7 @@
             </ul>
         </section>
 
-        <section class="section animBg" id="fourth">
+        <section class="section animBg">
             <h1>Vi løpes! </h1>
             <p>Hilsen Sky Blazers & Co.</p>
             <div class="logo-container">
@@ -68,10 +76,7 @@
     <script src="moment.js"></script>
     <script type="text/javascript">
 
-        let firstSectionEl = document.getElementById("first");
-        let secondSectionEl = document.getElementById("second");
-        let thirdSectionEl = document.getElementById("third");
-        
+        let headerEl = document.getElementById("header");        
         let isitAnswerEl = document.getElementById("isitAnswer");
 
         let degreesEl = document.getElementById("degrees");
@@ -110,24 +115,20 @@
         }
 
         function setBackground(number){
-            firstSectionEl.style.backgroundImage = 'url(media/pics/'+number+'.jpg)';
+            headerEl.style.backgroundImage = 'url(media/pics/'+number+'.jpg)';
         }
 
-        function weatherRow(item, goodIdea, whyNot){
+        function weatherRow(item, goodIdea){
 
             let goodIdeaEmoji = goodIdea ? '👍' : '👎';
-            let whyNotEmoji = whyNot ? '👍' : '👎';
-
 
             return `<tr>
                         <td>${item}</td>
                         <td>${goodIdeaEmoji}</td>
-                        <td>${whyNotEmoji}</td>
                     </tr>`;
         }
 
         function init(){
-
             //Getting some yr.no data
             fetch(forecastUrl, {
                 //mode: 'no-cors'
@@ -162,12 +163,11 @@
 
             setBackground(randomInt(1,14));
             
-            firstSectionEl.setAttribute("data-stirsdag", isStirsdag.toString());
+            headerEl.setAttribute("data-stirsdag", isStirsdag.toString());
 
             if (isStirsdag) {
                 isitAnswerEl.innerHTML = answers.yes[randomInt(0,answers.yes.length)];
             }else{
-                //isitAnswerEl.innerHTML = answers.no[randomInt(0,answers.no.length)];
                 isitAnswerEl.innerHTML = `
                     Nei, i dag er det bare vanlig ${moment().locale('nb').format('dddd')} 🤣. <br>
                     Neste Stirsdag er tirsdag ${moment().locale('nb').day(9).format('Do MMMM')}.
