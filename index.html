@@ -36,7 +36,8 @@
 
         <section class="section animBg" id="utstyr">
             <h1>Hva skal jeg ha med meg?</h1>
-            <p>Basert på vår super-hemmelige Stirsdags-algoritme, har vi kommet opp med følgende tabell for førstkommende Stirsdag:</p>
+            
+            <p id="gearText"></p>
             
             <table id="gearTable">
                 <tr>
@@ -81,6 +82,7 @@
 
         let degreesEl = document.getElementById("degrees");
         let gearTableBody = document.getElementById("gearTableBody");
+        let gearTextEl = document.getElementById("gearText");
 
         let forecast = {
             "data": {}
@@ -95,6 +97,7 @@
         let isStirsdag = day === 2 ? true : false;
 
         let daysUntilStirsdag = 7-day+2;
+        let nextStirsdagDate = moment().locale('nb').day(9).format('Do MMMM');
 
         function randomInt(min, max) {
             min = Math.ceil(min);
@@ -119,7 +122,6 @@
         }
 
         function weatherRow(item, goodIdea){
-
             let goodIdeaEmoji = goodIdea ? '👍' : '👎';
 
             return `<tr>
@@ -129,11 +131,7 @@
         }
 
         function init(){
-            //Getting some yr.no data
-            fetch(forecastUrl, {
-                //mode: 'no-cors'
-            }).then(function (response) {
-                console.log(response);
+             fetch(forecastUrl).then(function (response) {
                 return response.json().then(function (data) {
                     forecast.data = data;
 
@@ -144,11 +142,12 @@
                     let willItRain = stirsdagWeather.precipitation > 0 ? true : false;
                     let willItBeCold = stirsdagWeather.feelsLike.value < 5 ? true : false;
                     let willitBeSuperCold = stirsdagWeather.temperature.value < -1 ? true : false;
-
-                    console.log(stirsdagWeather);
+                    
+                    gearText.innerHTML = `Basert på vår super-hemmelige Stirsdags-algoritme, har vi kommet opp med følgende utstyrstabell for Stirsdag ${nextStirsdagDate}:</p>`;
                     
                     gearTableBody.innerHTML += weatherRow('Regntøy', willItRain, willItRain);
-                    gearTableBody.innerHTML += weatherRow('Varme klær', willItBeCold, willItBeCold);
+                    gearTableBody.innerHTML += weatherRow('Splitshorts', !willItBeCold, !willItBeCold);
+                    gearTableBody.innerHTML += weatherRow('Base layer / tights', willItBeCold, willItBeCold);
                     gearTableBody.innerHTML += weatherRow('Terrengsko', true, true);
                     gearTableBody.innerHTML += weatherRow('Hodelykt', true, true);
                     gearTableBody.innerHTML += weatherRow('Piggsko', willitBeSuperCold, willitBeSuperCold);
@@ -158,7 +157,8 @@
                 });
             }).catch(error => {
                 console.log(error);
-                gearTable.innerHTML = `<tr><td>Noe gikk galt. <a href="tel:004792841558">Ring HK.</a><td></tr>`;
+                gearText.innerHTML = `Noe gikk galt. <a href="tel:004792841558">Ring HK`;
+                gearTable.innerHTML = "";
             });
 
             setBackground(randomInt(1,14));
@@ -170,7 +170,7 @@
             }else{
                 isitAnswerEl.innerHTML = `
                     Nei, i dag er det bare vanlig ${moment().locale('nb').format('dddd')} 🤣. <br>
-                    Neste Stirsdag er tirsdag ${moment().locale('nb').day(9).format('Do MMMM')}.
+                    Neste Stirsdag er tirsdag ${nextStirsdagDate}.
                     <a href="https://www.facebook.com/pg/skyblazersrunning/events/">Meld deg på her</a>.`;
             }
         }
