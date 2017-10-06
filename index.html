@@ -119,9 +119,9 @@
         }
 
         function setBackground(number){
-            headerEl.style.backgroundImage = 'url(media/pics/'+number+'.jpg)';
+            headerEl.style.backgroundImage = `url("media/pics/${number}.jpg")`;
         }
-
+        
         function weatherRow(item, goodIdea){
             let goodIdeaEmoji = goodIdea ? '👍' : '👎';
 
@@ -132,7 +132,8 @@
         }
 
         function init(){
-             fetch(forecastUrl).then(function (response) {
+
+            fetch(forecastUrl).then(function (response) {
                 return response.json().then(function (data) {
                     forecast.data = data;
 
@@ -175,6 +176,8 @@
                     <a href="https://www.facebook.com/pg/skyblazersrunning/events/">Meld deg på her</a>.`;
             }
         }
+
+        
 
         if (window.addEventListener) window.addEventListener("load", init());
         else if (window.attachEvent) window.attachEvent("onload", init);
