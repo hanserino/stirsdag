@@ -117,7 +117,7 @@ a:hover{
     width: 100%;
     height: 100%;
     z-index: 0;
-    background: linear-gradient(40deg, rgba(0,0,0,.6) 0%,rgba(0,0,0,.25) 100%);    
+    background: linear-gradient(to bottom right, rgba(0,0,0,.7) 0%,rgba(0,0,0,.35) 40%, rgba(0,0,0,.05) 100%);    
 }
 
 #header *{
@@ -156,16 +156,16 @@ a:hover{
 }
 
 .animBg:nth-child(2){
-    animation-delay: -1s;
+    animation-delay: -10s;
 }
 .animBg:nth-child(3){
-    animation-delay: 2s;
+    animation-delay: -15s;
 }
 .animBg:nth-child(4){
-    animation-delay: 4s;
+    animation-delay: -5s;
 }
 .animBg:nth-child(5){
-    animation-delay: 1.5s;
+    animation-delay: -1s;
 }
 
 .animBg:nth-child(even){
@@ -173,7 +173,7 @@ a:hover{
 }
 
 @keyframes animBg {
-    15% { background-color: rgba(255, 0, 0, 0.2); } 
+    15% { background-color: rgba(104, 207, 255, 0.2); } 
     30% { background-color: rgba(255, 255, 0, 0.2); } 
     45% { background-color: rgba(0, 128, 0, 0.2); } 
     60% { background-color: rgba(0, 0, 255, 0.2); }
