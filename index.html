@@ -82,7 +82,7 @@
         };
 
 
-        let forecastUrl = 'http://yr.no/api/v0/locations/1-73569/forecast';
+        let forecastUrl = 'https://yr.no/api/v0/locations/1-73569/forecast';
 
         let date = new Date(),
             day = date.getDay();
@@ -129,7 +129,10 @@
         function init(){
 
             //Getting some yr.no data
-            fetch(forecastUrl).then(function (response) {
+            fetch(forecastUrl, {
+                //mode: 'no-cors'
+            }).then(function (response) {
+                console.log(response);
                 return response.json().then(function (data) {
                     forecast.data = data;
 
@@ -154,7 +157,7 @@
                 });
             }).catch(error => {
                 console.log(error);
-                gearTableBody.innerHTML = `<tr><td>Noe gikk galt..</td><td></td><td></td></tr>`;
+                gearTable.innerHTML = `<tr><td>Noe gikk galt. <a href="tel:004792841558">Ring HK.</a><td></tr>`;
             });
 
             setBackground(randomInt(1,14));
