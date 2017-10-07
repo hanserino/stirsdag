@@ -4,7 +4,7 @@ window.addEventListener('load', function() {
 
     let degreesEl = document.getElementById("degrees");
     let gearTableBody = document.getElementById("gearTableBody");
-    let gearTextEl = document.getElementById("gearText");
+    let weatherText = document.getElementById("weatherText");
 
     let forecast = {
         "data": {}
