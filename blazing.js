@@ -101,7 +101,7 @@ window.addEventListener('load', function() {
         });
     }).catch(error => {
         console.log(error);
-        gearText.innerHTML = `Noe gikk galt. <a href="tel:004792841558">Ring HK`;
+        weatherText.innerHTML = `Noe gikk galt. <a href="tel:004792841558">Ring HK`;
         gearTable.innerHTML = "";
     });
 
