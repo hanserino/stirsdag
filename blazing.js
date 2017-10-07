@@ -72,13 +72,13 @@ window.addEventListener('load', function() {
             let yrInterval = 4*daysUntilStirsdag;
             let stirsdagWeather = forecast.data.longIntervals[yrInterval];
 
-            console.log(stirsdagWeather);
+            //console.log(stirsdagWeather);
 
             let willItRain = stirsdagWeather.precipitation > 0 ? true : false;
             let willItBeCold = stirsdagWeather.feelsLike.value < 5 ? true : false;
             let willitBeSuperCold = stirsdagWeather.temperature.value < -1 ? true : false;
             
-            gearText.innerHTML = 
+            weatherText.innerHTML = 
             `
             <p>Prognosen for Lillomarka ${nextStirsdagDate} er som følger: </p>
             <p>
@@ -104,6 +104,6 @@ window.addEventListener('load', function() {
         gearText.innerHTML = `Noe gikk galt. <a href="tel:004792841558">Ring HK`;
         gearTable.innerHTML = "";
     });
-    
+
 });
 
