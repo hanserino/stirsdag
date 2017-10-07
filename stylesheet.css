@@ -54,6 +54,9 @@ li{
 a{
     color: inherit;
 }
+em{
+    font-weight: bold;
+}
 
 @media (min-width: 600px){
     h1{

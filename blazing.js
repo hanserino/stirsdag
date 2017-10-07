@@ -67,16 +67,27 @@ window.addEventListener('load', function() {
     fetch(forecastUrl).then(function (response) {
         return response.json().then(function (data) {
             forecast.data = data;
-
+            
             //Todo: get the yrInterval to hit midday inteval
             let yrInterval = 4*daysUntilStirsdag;
             let stirsdagWeather = forecast.data.longIntervals[yrInterval];
+
+            console.log(stirsdagWeather);
 
             let willItRain = stirsdagWeather.precipitation > 0 ? true : false;
             let willItBeCold = stirsdagWeather.feelsLike.value < 5 ? true : false;
             let willitBeSuperCold = stirsdagWeather.temperature.value < -1 ? true : false;
             
-            gearText.innerHTML = `Basert på vår super-hemmelige Stirsdags-algoritme, har vi kommet opp med følgende utstyrstabell for Stirsdag ${nextStirsdagDate}:</p>`;
+            gearText.innerHTML = 
+            `
+            <p>Prognosen for Lillomarka ${nextStirsdagDate} er som følger: </p>
+            <p>
+            Det blir <em>${stirsdagWeather.temperature.value}&deg;C</em>, men pga vind og luftfuktighet kommer det til å føles som ca <em>${stirsdagWeather.feelsLike.value}&deg;C</em>.<br />
+            Med <em>${stirsdagWeather.precipitation.value}mm nedbør</em> ser det ut til å bli en Blazing Stirsdag!
+            </p>
+            
+            <p>Basert på YR-data har vi generert denne tabellen til deg: </p>
+            `;
             
             gearTableBody.innerHTML += weatherRow('Regntøy', willItRain, willItRain);
             gearTableBody.innerHTML += weatherRow('Splitshorts', !willItBeCold, !willItBeCold);
@@ -93,5 +104,6 @@ window.addEventListener('load', function() {
         gearText.innerHTML = `Noe gikk galt. <a href="tel:004792841558">Ring HK`;
         gearTable.innerHTML = "";
     });
+    
 });
 
