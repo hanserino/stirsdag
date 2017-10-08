@@ -43,7 +43,7 @@ window.addEventListener('load', function() {
 
     const answers = {
         yes: [
-            "Ja for faen! Vi ses på <a href='https://goo.gl/maps/cuhG4nfLZtM2'>Disen Trikkestopp</a> kl 17:50!",
+            "Jaaa!!! Vi ses på <a href='https://goo.gl/maps/cuhG4nfLZtM2'>Disen Trikkestopp</a> kl 17:50!",
             "Fuck yeah! Vi ses på <a href='https://goo.gl/maps/cuhG4nfLZtM2'>Disen Trikkestopp</a> kl 17:50!"
         ],
         no: [
@@ -82,33 +82,53 @@ window.addEventListener('load', function() {
     fetch(forecastUrl).then(function (response) {
         return response.json().then(function (data) {
 
-            console.log(data)
-            //forecast.data = data;
+            forecast.data = data;
             
-            //Todo: get the yrInterval to hit midday inteval
             let yrInterval = 4*daysUntilStirsdag(day);
-            let stirsdagWeather = data.longIntervals[yrInterval];
+            let stirsdagWeather = forecast.data.longIntervals[yrInterval];
+            
+            let tempText = "",
+                feelsLikeText = "",
+                precipText = "";
 
-            console.log(stirsdagWeather, daysUntilStirsdag(day));
+            if(stirsdagWeather.temperature.value != undefined){
+                tempText = `Det ser ut til å bli <em>${stirsdagWeather.temperature.value}&deg;<abbr title="Celcius">C</abbr></em> på stien.<br />`;
+            }
+
+            if(stirsdagWeather.feelsLike.value != undefined){
+                feelsLikeText = `Vær obs på at pga. kombinasjonen av vind og luftfuktighet kommer det til å føles som ca. <em>${stirsdagWeather.feelsLike.value}&deg;<abbr title="Celcius">C</abbr></em>, så ikke la deg lure!<br />`;
+            }
+
+            if(stirsdagWeather.precipitation.value != undefined){
+                if(stirsdagWeather.precipitation.value > 5){
+                    precipText = `Med en nedbørsmengde på ca. <em>${stirsdagWeather.precipitation.value}<abbr title="milimeter">mm</abbr></em> kan dette bli en meget interessant Stirsdag. Kle deg etter forholdene. `;
+                }
+                else {
+                    precipText = `Det blir ingen/lite nedbør, så det blir en <em>relativt tørr Stirsdag</em>.`;
+                }
+                
+            }
+
+            //console.log(stirsdagWeather, daysUntilStirsdag(day), stirsdagWeather.feelsLike.value);
 
             let willItRain = stirsdagWeather.precipitation > 0 ? true : false;
-            let willItBeCold = stirsdagWeather.feelsLike.value < 5 ? true : false;
+            let willItBeCold = stirsdagWeather.temperature.value < 5 ? true : false;
             let willitBeSuperCold = stirsdagWeather.temperature.value < -1 ? true : false;
-            
+
             weatherText.innerHTML = 
             `
-            <p>Prognosen for Lillomarka ${nextStirsdagDate} er som følger: </p>
+            <p>Prognosen for Lillomarka ${nextStirsdagDate} lyder som følger: </p>
             <p>
-            Det blir <em>${stirsdagWeather.temperature.value}&deg;C</em>, men pga vind og luftfuktighet kommer det til å føles som ca <em>${stirsdagWeather.feelsLike.value}&deg;C</em>.<br />
-            Med <em>${stirsdagWeather.precipitation.value}mm nedbør</em> ser det ut til å bli en Blazing Stirsdag!
+                ${tempText}
+                ${feelsLikeText}
+                ${precipText}
             </p>
-            
-            <p>Basert på YR-data har vi generert denne tabellen til deg: </p>
+            <p>Basert på værmeldingen har også generert denne smukke tabellen til deg: </p>
             `;
             
             gearTableBody.innerHTML += weatherRow('Regntøy', willItRain, willItRain);
             gearTableBody.innerHTML += weatherRow('Splitshorts', !willItBeCold, !willItBeCold);
-            gearTableBody.innerHTML += weatherRow('Base layer / tights', willItBeCold, willItBeCold);
+            gearTableBody.innerHTML += weatherRow('Tights', willItBeCold, willItBeCold);
             gearTableBody.innerHTML += weatherRow('Terrengsko', true, true);
             gearTableBody.innerHTML += weatherRow('Hodelykt', true, true);
             gearTableBody.innerHTML += weatherRow('Piggsko', willitBeSuperCold, willitBeSuperCold);
