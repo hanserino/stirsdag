@@ -21,7 +21,10 @@ html {
     box-sizing: border-box;
     font-size: 100%;
 }
-
+abbr {
+    font-variant: none;
+    text-decoration: none;
+}
 *, *:before, *:after {
     box-sizing: inherit;
 }
