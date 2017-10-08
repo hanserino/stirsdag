@@ -17,10 +17,25 @@ window.addEventListener('load', function() {
 
     let isStirsdag = day === 2 ? true : false;
 
-    let daysUntilStirsdag = 7-day+2;
-    let nextStirsdagDate = moment().locale('nb').day(9).format('Do MMMM');
+    let daysUntilStirsdag = function(today){            
+        if(today === 0) return 2;
+        if(today === 1) return 1;
+        if(today === 2) return 0;
+        if(today === 3) return 5;
+        if(today === 4) return 4;
+        if(today === 5) return 3;
+        if(today === 6) return 2;
 
-    function randomInt(min, max) {
+        else{
+            return empty;
+        }
+    }
+
+    console.log('daysUntilStirsdag: ' , daysUntilStirsdag(day));
+
+    let nextStirsdagDate = moment().locale('nb').day(daysUntilStirsdag(day)).format('Do MMMM');
+
+    function randomInt(min, max) { 
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min)) + min;
@@ -66,13 +81,15 @@ window.addEventListener('load', function() {
 
     fetch(forecastUrl).then(function (response) {
         return response.json().then(function (data) {
-            forecast.data = data;
+
+            console.log(data)
+            //forecast.data = data;
             
             //Todo: get the yrInterval to hit midday inteval
-            let yrInterval = 4*daysUntilStirsdag;
-            let stirsdagWeather = forecast.data.longIntervals[yrInterval];
+            let yrInterval = 4*daysUntilStirsdag(day);
+            let stirsdagWeather = data.longIntervals[yrInterval];
 
-            //console.log(stirsdagWeather);
+            console.log(stirsdagWeather, daysUntilStirsdag(day));
 
             let willItRain = stirsdagWeather.precipitation > 0 ? true : false;
             let willItBeCold = stirsdagWeather.feelsLike.value < 5 ? true : false;
