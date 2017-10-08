@@ -73,7 +73,7 @@ window.addEventListener('load', function() {
         isitAnswerEl.innerHTML = answers.yes[randomInt(0,answers.yes.length)];
     }else{
         isitAnswerEl.innerHTML = `
-            Nei, i dag er det bare vanlig ${moment().locale('nb').format('dddd')} 🤣. <br>
+            Nei, i dag er det bare vanlig ${moment().locale('nb').format('dddd')}. <br>
             Neste Stirsdag er tirsdag ${nextStirsdagDate}.
             <a href="https://www.facebook.com/pg/skyblazersrunning/events/">Meld deg på her</a>.`;
     }
