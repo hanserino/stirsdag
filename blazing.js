@@ -6,10 +6,7 @@ window.addEventListener('load', function() {
     let gearTableBody = document.getElementById("gearTableBody");
     let weatherText = document.getElementById("weatherText");
 
-    let forecast = {
-        "data": {}
-    };
-
+    let forecast = {"data": {}};
     let forecastUrl = 'https://www.yr.no/api/v0/locations/1-73569/forecast';
 
     let date = new Date(),
@@ -31,9 +28,7 @@ window.addEventListener('load', function() {
         }
     }
 
-    console.log('daysUntilStirsdag: ' , daysUntilStirsdag(day));
-
-    let nextStirsdagDate = moment().locale('nb').day(2).format('Do MMMM');
+    let nextStirsdagDate = moment().locale('nb').day(daysUntilStirsdag(day)+1).format('Do MMMM')
 
     function randomInt(min, max) { 
         min = Math.ceil(min);
@@ -43,8 +38,8 @@ window.addEventListener('load', function() {
 
     const answers = {
         yes: [
-            "Jaaa!!! Vi ses på <a href='https://goo.gl/maps/cuhG4nfLZtM2'>Disen Trikkestopp</a> kl 17:50!",
-            "Fuck yeah! Vi ses på <a href='https://goo.gl/maps/cuhG4nfLZtM2'>Disen Trikkestopp</a> kl 17:50!"
+            "Jaaaa!!! Vi ses på <a href='https://goo.gl/maps/cuhG4nfLZtM2'>Disen Trikkestopp</a> kl 17:50!",
+            "Hell yeah!!! Vi ses på <a href='https://goo.gl/maps/cuhG4nfLZtM2'>Disen Trikkestopp</a> kl 17:50!"
         ],
         no: [
             "Nope. Ta deg en bolle.",
@@ -73,11 +68,10 @@ window.addEventListener('load', function() {
         isitAnswerEl.innerHTML = answers.yes[randomInt(0,answers.yes.length)];
     }else{
         isitAnswerEl.innerHTML = `
-            Nei, i dag er det bare vanlig ${moment().locale('nb').format('dddd')}. <br>
+            Nei, i dag er det dessverre bare vanlig ${moment().locale('nb').format('dddd')}. <br>
             Neste Stirsdag er tirsdag ${nextStirsdagDate}.
             <a href="https://www.facebook.com/pg/skyblazersrunning/events/">Meld deg på her</a>.`;
     }
-
 
     fetch(forecastUrl).then(function (response) {
         return response.json().then(function (data) {
@@ -109,21 +103,19 @@ window.addEventListener('load', function() {
                 
             }
 
-            //console.log(stirsdagWeather, daysUntilStirsdag(day), stirsdagWeather.feelsLike.value);
-
             let willItRain = stirsdagWeather.precipitation > 0 ? true : false;
             let willItBeCold = stirsdagWeather.temperature.value < 5 ? true : false;
             let willitBeSuperCold = stirsdagWeather.temperature.value < -1 ? true : false;
 
             weatherText.innerHTML = 
-            `
-            <p>Prognosen for Lillomarka ${nextStirsdagDate} lyder som følger: </p>
-            <p>
-                ${tempText}
-                ${feelsLikeText}
-                ${precipText}
-            </p>
-            <p>Basert på værmeldingen har også generert denne smukke tabellen til deg: </p>
+                `
+                <p>Prognosen for Lillomarka ${nextStirsdagDate} lyder som følger: </p>
+                <p>
+                    ${tempText}
+                    ${feelsLikeText}
+                    ${precipText}
+                </p>
+                <p>Basert på værmeldingen har også generert denne smukke tabellen til deg: </p>
             `;
             
             gearTableBody.innerHTML += weatherRow('Regntøy', willItRain, willItRain);
