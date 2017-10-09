@@ -33,7 +33,7 @@ window.addEventListener('load', function() {
 
     console.log('daysUntilStirsdag: ' , daysUntilStirsdag(day));
 
-    let nextStirsdagDate = moment().locale('nb').day(daysUntilStirsdag(day)).format('Do MMMM');
+    let nextStirsdagDate = moment().locale('nb').day(2).format('Do MMMM');
 
     function randomInt(min, max) { 
         min = Math.ceil(min);
