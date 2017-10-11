@@ -28,7 +28,7 @@ window.addEventListener('load', function() {
         }
     }
 
-    let nextStirsdagDate = moment().locale('nb').day(daysUntilStirsdag(day)+1).format('Do MMMM')
+    let nextStirsdagDate = moment(date).locale('nb').add(daysUntilStirsdag(day)+1, 'days').format('Do MMMM');
 
     function randomInt(min, max) { 
         min = Math.ceil(min);
