@@ -14,6 +14,18 @@ window.addEventListener('load', function() {
 
     let isStirsdag = day === 2 ? true : false;
 
+    let isTouchDevice = function(){
+        return (
+            !!(typeof window !== 'undefined' &&
+              ('ontouchstart' in window ||
+                (window.DocumentTouch &&
+                  typeof document !== 'undefined' &&
+                  document instanceof window.DocumentTouch))) ||
+            !!(typeof navigator !== 'undefined' &&
+              (navigator.maxTouchPoints || navigator.msMaxTouchPoints))
+          );      
+    };
+
     let daysUntilStirsdag = function(today){            
         if(today === 0) return 2;
         if(today === 1) return 1;
@@ -61,7 +73,8 @@ window.addEventListener('load', function() {
                 </tr>`;
     }
 
-    setBackground(randomInt(1,14));
+    setBackground(randomInt(1,13));
+    document.body.setAttribute("data-touch", isTouchDevice());
     headerEl.setAttribute("data-stirsdag", isStirsdag.toString());
 
     if (isStirsdag) {
@@ -86,21 +99,26 @@ window.addEventListener('load', function() {
                 precipText = "";
 
             if(stirsdagWeather.temperature.value != undefined){
-                tempText = `Det ser ut til å bli <em>${stirsdagWeather.temperature.value}&deg;<abbr title="Celcius">C</abbr></em> på stien.<br />`;
+                tempText = `Moder Sti byr på imponerende <em>${stirsdagWeather.temperature.value}&deg;<abbr title="Celcius">C</abbr></em>.`;
             }
 
             if(stirsdagWeather.feelsLike.value != undefined){
-                feelsLikeText = `Vær obs på at pga. kombinasjonen av vind og luftfuktighet kommer det til å føles som ca. <em>${stirsdagWeather.feelsLike.value}&deg;<abbr title="Celcius">C</abbr></em>, så ikke la deg lure!<br />`;
+                feelsLikeText = `Pga. kombinasjonen av vind og luftfuktighet kommer det til å føles som ca. <em>${stirsdagWeather.feelsLike.value}&deg;<abbr title="Celcius">C</abbr></em>, så ikke la deg lure!<br />`;
             }
 
             if(stirsdagWeather.precipitation.value != undefined){
                 if(stirsdagWeather.precipitation.value > 5){
                     precipText = `Med en nedbørsmengde på ca. <em>${stirsdagWeather.precipitation.value}<abbr title="milimeter">mm</abbr></em> kan dette bli en meget interessant Stirsdag. Kle deg etter forholdene. `;
                 }
-                else {
+                if((stirsdagWeather.precipitation.value > 1) && (stirsdagWeather.precipitation.value < 5) ){
+                    precipText = `Med en nedbørsmengde på ca. <em>${stirsdagWeather.precipitation.value}<abbr title="milimeter">mm</abbr></em> blir det bittelitt bløtt, så ta med deg regnjakke. `;
+                }
+                if( (stirsdagWeather.precipitation.value < 1) && (stirsdagWeather.precipitation.value > 0)){
                     precipText = `Det blir ingen/lite nedbør, så det blir en <em>relativt tørr Stirsdag</em>.`;
                 }
-                
+                if(stirsdagWeather.precipitation.value === 0){
+                    precipText = `Det er ikke meldt én eneste dråpe regn, så du kan la paraplyen ligge hjemme.`;
+                }
             }
 
             let willItRain = stirsdagWeather.precipitation > 0 ? true : false;
@@ -115,12 +133,11 @@ window.addEventListener('load', function() {
                     ${feelsLikeText}
                     ${precipText}
                 </p>
-                <p>Basert på værmeldingen har også generert denne smukke tabellen til deg: </p>
+                <p>Basert på værmeldingen har vi også generert denne lekre tabellen til deg: </p>
             `;
             
             gearTableBody.innerHTML += weatherRow('Regntøy', willItRain, willItRain);
             gearTableBody.innerHTML += weatherRow('Splitshorts', !willItBeCold, !willItBeCold);
-            gearTableBody.innerHTML += weatherRow('Tights', willItBeCold, willItBeCold);
             gearTableBody.innerHTML += weatherRow('Terrengsko', true, true);
             gearTableBody.innerHTML += weatherRow('Hodelykt', true, true);
             gearTableBody.innerHTML += weatherRow('Piggsko', willitBeSuperCold, willitBeSuperCold);
