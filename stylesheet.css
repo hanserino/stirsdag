@@ -105,9 +105,6 @@ a:hover{
     }
 }
 
-/**
-* FIRST SECTION
-*/
 
 #header{
     background-size: cover;
@@ -195,8 +192,6 @@ a:hover{
     50% { opacity: 0; }
 }
 
-
-
 table{
     margin: 1rem 0;
     width: 100%;
@@ -237,10 +232,11 @@ td {
     align-items: flex-start;
     width: 100%;
     margin: 0 0 0 0;
-    border: 1px solid rgba(0,0,0,.08);
+    z-index: 0;
+    position: relative;
+    border: 1px solid rgba(0,0,0,.045);
     padding: .5rem 0;
     border-width: 0 0 1px 0;
-
 }
 
 .quote-list img{
@@ -248,16 +244,49 @@ td {
     width: 20%;
     height: auto;
     max-width: 300px;
-    margin: 0 1rem 0 0;
+    position: relative;
+    z-index: 1;
+    margin: 0 .5rem 0 0;
+    transform: scale(1) rotate(0deg);
 }
 
+.quote-list div{
+    padding: 0 0 .5rem 0;
+}
+
+
 @media (min-width: 500px){
+    
     .quote-list li{
         align-items: center;
         padding:  2rem 0
     }
     .quote-list img{
-        margin: 0 2rem 0 0;
+        margin: 0 1rem 0 0;
+    }
+    .quote-list div{
+        padding: 1rem;
+        transform: translate(0,0);
+    }
+
+    [data-touch="false"] .quote-list img{transition: transform .25s ease-out 0s;}
+    [data-touch="false"] .quote-list div{transition: transform .25s ease-out .1s;}
+
+    [data-touch="false"] .quote-list li:hover {
+        z-index: 1;
+        border-color: transparent;
+    }
+   
+    [data-touch="false"] .quote-list li:hover img{
+        transform: scale(1.75) rotate(360deg);
+    }
+
+    [data-touch="false"] .quote-list li:hover div{
+        background: white;
+        color: black;
+        position: relative;
+        transform: translate(-1rem, -1rem);
+        z-index: 2;
     }
 }
 

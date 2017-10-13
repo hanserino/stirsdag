@@ -14,6 +14,18 @@ window.addEventListener('load', function() {
 
     let isStirsdag = day === 2 ? true : false;
 
+    let isTouchDevice = function(){
+        return (
+            !!(typeof window !== 'undefined' &&
+              ('ontouchstart' in window ||
+                (window.DocumentTouch &&
+                  typeof document !== 'undefined' &&
+                  document instanceof window.DocumentTouch))) ||
+            !!(typeof navigator !== 'undefined' &&
+              (navigator.maxTouchPoints || navigator.msMaxTouchPoints))
+          );      
+    };
+
     let daysUntilStirsdag = function(today){            
         if(today === 0) return 2;
         if(today === 1) return 1;
@@ -61,7 +73,8 @@ window.addEventListener('load', function() {
                 </tr>`;
     }
 
-    setBackground(randomInt(1,14));
+    setBackground(randomInt(1,13));
+    document.body.setAttribute("data-touch", isTouchDevice());
     headerEl.setAttribute("data-stirsdag", isStirsdag.toString());
 
     if (isStirsdag) {
@@ -90,7 +103,7 @@ window.addEventListener('load', function() {
             }
 
             if(stirsdagWeather.feelsLike.value != undefined){
-                feelsLikeText = `Vær obs på at pga. kombinasjonen av vind og luftfuktighet kommer det til å føles som ca. <em>${stirsdagWeather.feelsLike.value}&deg;<abbr title="Celcius">C</abbr></em>, så ikke la deg lure!<br />`;
+                feelsLikeText = `Pga. kombinasjonen av vind og luftfuktighet kommer det til å føles som ca. <em>${stirsdagWeather.feelsLike.value}&deg;<abbr title="Celcius">C</abbr></em>, så ikke la deg lure!<br />`;
             }
 
             if(stirsdagWeather.precipitation.value != undefined){
