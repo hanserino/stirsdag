@@ -86,7 +86,7 @@ window.addEventListener('load', function() {
                 precipText = "";
 
             if(stirsdagWeather.temperature.value != undefined){
-                tempText = `Det ser ut til å bli <em>${stirsdagWeather.temperature.value}&deg;<abbr title="Celcius">C</abbr></em> på stien.<br />`;
+                tempText = `Moder Sti byr på imponerende <em>${stirsdagWeather.temperature.value}&deg;<abbr title="Celcius">C</abbr></em>.`;
             }
 
             if(stirsdagWeather.feelsLike.value != undefined){
@@ -97,10 +97,15 @@ window.addEventListener('load', function() {
                 if(stirsdagWeather.precipitation.value > 5){
                     precipText = `Med en nedbørsmengde på ca. <em>${stirsdagWeather.precipitation.value}<abbr title="milimeter">mm</abbr></em> kan dette bli en meget interessant Stirsdag. Kle deg etter forholdene. `;
                 }
-                else {
+                if((stirsdagWeather.precipitation.value > 1) && (stirsdagWeather.precipitation.value < 5) ){
+                    precipText = `Med en nedbørsmengde på ca. <em>${stirsdagWeather.precipitation.value}<abbr title="milimeter">mm</abbr></em> blir det bittelitt bløtt, så ta med deg regnjakke. `;
+                }
+                if( (stirsdagWeather.precipitation.value < 1) && (stirsdagWeather.precipitation.value > 0)){
                     precipText = `Det blir ingen/lite nedbør, så det blir en <em>relativt tørr Stirsdag</em>.`;
                 }
-                
+                if(stirsdagWeather.precipitation.value === 0){
+                    precipText = `Det er ikke meldt én eneste dråpe regn, så du kan la paraplyen ligge hjemme.`;
+                }
             }
 
             let willItRain = stirsdagWeather.precipitation > 0 ? true : false;
@@ -115,12 +120,11 @@ window.addEventListener('load', function() {
                     ${feelsLikeText}
                     ${precipText}
                 </p>
-                <p>Basert på værmeldingen har også generert denne smukke tabellen til deg: </p>
+                <p>Basert på værmeldingen har vi også generert denne lekre tabellen til deg: </p>
             `;
             
             gearTableBody.innerHTML += weatherRow('Regntøy', willItRain, willItRain);
             gearTableBody.innerHTML += weatherRow('Splitshorts', !willItBeCold, !willItBeCold);
-            gearTableBody.innerHTML += weatherRow('Tights', willItBeCold, willItBeCold);
             gearTableBody.innerHTML += weatherRow('Terrengsko', true, true);
             gearTableBody.innerHTML += weatherRow('Hodelykt', true, true);
             gearTableBody.innerHTML += weatherRow('Piggsko', willitBeSuperCold, willitBeSuperCold);

@@ -162,8 +162,8 @@ a:hover{
 
 
 .animBg{
-    background: white;
-    animation: animBg 15s infinite reverse;
+    background: rgba(25, 195, 247, 0.212);
+    animation: animBg 25s infinite reverse;
 }
 
 .animBg:nth-child(2){
@@ -176,7 +176,7 @@ a:hover{
     animation-delay: -5s;
 }
 .animBg:nth-child(5){
-    animation-delay: -1s;
+    animation-delay: -10s;
 }
 
 .animBg:nth-child(even){
@@ -184,10 +184,10 @@ a:hover{
 }
 
 @keyframes animBg {
-    15% { background-color: rgba(104, 207, 255, 0.2); } 
-    30% { background-color: rgba(255, 255, 0, 0.2); } 
-    45% { background-color: rgba(0, 128, 0, 0.2); } 
-    60% { background-color: rgba(0, 0, 255, 0.2); }
+    15% { background-color: rgba(104, 207, 255, 0.13); } 
+    30% { background-color: rgba(255, 255, 0, 0.132); } 
+    45% { background-color: rgba(0, 128, 0, 0.13); } 
+    60% { background-color: rgba(255, 0, 64, 0.13); }
     75% { background-color: white; }
 }
 
@@ -225,18 +225,45 @@ td {
 .quote-list{
     padding: 0;
     margin: 0;
+    display: flex;
+    flex-direction: column;
     list-style: none;
     font-size: 1rem;
 }
 
 .quote-list li{
-    display: inline-block;
-    margin: 0 0 1rem 0;
+    display: flex;
+    flex: 1 100%;
+    align-items: flex-start;
+    width: 100%;
+    margin: 0 0 0 0;
+    border: 1px solid rgba(0,0,0,.08);
+    padding: .5rem 0;
+    border-width: 0 0 1px 0;
+
 }
+
+.quote-list img{
+    border-radius: 50%;
+    width: 20%;
+    height: auto;
+    max-width: 300px;
+    margin: 0 1rem 0 0;
+}
+
 @media (min-width: 500px){
     .quote-list li{
-        margin: 0 1rem 1rem 0;
+        align-items: center;
+        padding:  2rem 0
     }
+    .quote-list img{
+        margin: 0 2rem 0 0;
+    }
+}
+
+.quote-list span{
+    margin: .1rem 0 0 .25rem;
+    display: block;
 }
 
 
@@ -251,7 +278,3 @@ blockquote:before {
     content: open-quote;
 }
 
-.quote-list span{
-    margin: .1rem 0 0 1rem;
-    display: block;
-}
