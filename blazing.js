@@ -50,8 +50,8 @@ window.addEventListener('load', function () {
 
     const answers = {
         yes: [
-            "Jaaaa!!! Vi ses på <a href='https://goo.gl/maps/cuhG4nfLZtM2'>Disen Trikkestopp</a> kl 17:50!",
-            "Hell yeah!!! Vi ses på <a href='https://goo.gl/maps/cuhG4nfLZtM2'>Disen Trikkestopp</a> kl 17:50!"
+            "Jaaaa!!! Vi ses på <a href='https://goo.gl/maps/cuhG4nfLZtM2'>Disen Trikkestopp</a> kl 17:55!",
+            "Hell yeah!!! Vi ses på <a href='https://goo.gl/maps/cuhG4nfLZtM2'>Disen Trikkestopp</a> kl 17:55!"
         ],
         no: [
             "Nope. Ta deg en bolle.",

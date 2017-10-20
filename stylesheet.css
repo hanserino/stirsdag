@@ -98,6 +98,7 @@ a:hover{
     display: flex;
     flex-direction: column;
     align-content: center;  
+    position: relative;
 }
 
 .section__inner{
@@ -342,4 +343,15 @@ blockquote:after {
 }
 blockquote:before {
     content: open-quote;
+}
+
+#loypa{
+    
+}
+#map{
+    
+}
+#loypa h1{ 
+    position: relative;
+    z-index: 3;
 }
