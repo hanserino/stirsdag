@@ -1,143 +1,207 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107726023-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-107726023-1');
-    </script>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Stirsdag - run sti get high!</title>
-    <meta property="og:site_name" content="Stirsdag"/>
-    <meta property="og:title" content="Stirsdag - Run sti get high!"/>
-    <meta property="og:description" content="Stirsdag med Sky Blazers. 12-16km stiløping hver tirsdag kl 18:00 fra Disen trikkestasjon."/>
-    <meta property="og:image" content="media/headerPics/10.jpg">
-    <meta property="og:url" content="http://stirsdag.no/">
+    <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107726023-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', 'UA-107726023-1');
+        </script>
 
-    <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
-    <link rel="stylesheet" href="./stylesheet.css" type="text/css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Stirsdag - run sti get high!</title>
+        <meta property="og:site_name" content="Stirsdag" />
+        <meta property="og:title" content="Stirsdag - Run sti get high!" />
+        <meta property="og:description" content="Stirsdag med Sky Blazers. 12-16km stiløping hver tirsdag kl 18:00 fra Disen trikkestasjon."
+        />
+        <meta property="og:image" content="media/headerPics/10.jpg">
+        <meta property="og:url" content="http://stirsdag.no/">
 
-    <script src="./moment.js" type="text/javascript"></script>
-    <script src="./blazing.js" type="text/javascript"></script>
+        
+        
+        <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
+        <link rel="stylesheet" href="./stylesheet.css" type="text/css">
 
-  </head>
-  <body>
-      <main class="wrapper">
- 
-        <header class="section textOnPic" id="header" data-stirsdag="">
-            <h1 id="isitQuestion">Er det Stirsdag idag?</h1>
-            <p id="isitAnswer"></p>
+        <link href='https://api.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.css' rel='stylesheet' />
 
-            <nav class="nav">
-                <ul>
-                    <li><a href="#hva-er-stirsdag">Hva er Stirsdag?</a></li>
-                    <li><a href="#utstyr">Vær og utstyr</a></li>
-                    <li><a href="#quotes">Hørt på Stirsdag</a></li>
-                    <li><a href="#hvem-staar-bak">Hvem står bak?</a></li>
-                </ul>
-            </nav>
-        </header>
+        <style>
+            #map {
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+            }
+        </style>
 
-        <section class="section animBg" id="hva-er-stirsdag">
-            <div class="section__inner">
-                <h1>Hva er Stirsdag?</h1>
-                <p>Kort oppsummert er Stirsdag tirsdagstreninga til <a href="#hvem-staar-bak">Sky Blazers</a> hvor alle er velkomne. Vi møtes ved trikkestoppet på Disen, tirsdager kl. 18:00 og løper opp Grefsenkollen og videre inn i marka før vi ender opp på trikkestasjonen på Kjelsås. </p>
-                <p>Etterpå tar vi trikken nedover mot Løkka hvor vi tar en matbit og en øl/brus. Høres det fett ut, så bli med! </p>
-                <p>Fortsatt ikke 100% solgt? Hr. Rummelhoff har forfattet en litt mer <a href="https://www.strava.com/athletes/4595507/posts/677173">utdypende tekst om Stirsdag her.</a></p>
-            </div>
-        </section>
+    </head>
 
-        <section class="section animBg" id="utstyr">
-            <div class="section__inner">
-                <h1>Vær og utstyr</h1>
-                <p id="weatherText"></p>
+    <body>
+        <main class="wrapper">
 
-                <table id="gearTable">
-                    <tr>
-                        <th>Plagg/utstyr</th>
-                        <th>God idé?</th>
-                    </tr>
-                    <tbody id="gearTableBody"></tbody>
-                </table>
-            </div>
-        </section>
+            <header class="section textOnPic" id="header" data-stirsdag="">
+                <h1 id="isitQuestion">Er det Stirsdag idag?</h1>
+                <p id="isitAnswer"></p>
 
-        <section class="section animBg" id="hvem-staar-bak">
-            <div class="section__inner">
-                <h1>Hvem står bak Stirsdag?</h1>
-                <p>Stirsdag er et initiativ av løpecrewet Sky Blazers. Vi består av ca 10stk kvinner og menn som rett og slett elsker å løpe og konkurrere i røfft terreng. Flesteparten av oss holder til i Oslo-området. "Sky" kommer av at vi digger <a href="https://en.wikipedia.org/wiki/Skyrunning">skyrunning</a>. "Less cloud, more sky!", som de sier på fagspråket.</p>
-                <p>Du finner oss i disse kanalene:</p>
-                <ul>
-                    <li>Facebook: <a href="https://www.facebook.com/skyblazersrunning/">@skyblazersrunning</a></li>
-                    <li>Instagram: <a href="https://www.instagram.com/skyblazersrunning/">@skyblazersrunning</a></li>
-                    <li>Strava: <a href="https://www.strava.com/clubs/skyblazers">@skyblazers</a></li>
-                    <li>Medium: <a href="https://medium.com/skyblazers">@skyblazers</a></li>
-                </ul>
-            </div>
-        </section>
+                <nav class="nav">
+                    <ul>
+                        <li>
+                            <a href="#hva-er-stirsdag">Hva er Stirsdag?</a>
+                        </li>
+                        <li>
+                            <a href="#loypa">Hvor løper vi?</a>
+                        </li>
+                        <li>
+                            <a href="#utstyr">Vær og utstyr</a>
+                        </li>
+                        <li>
+                            <a href="#quotes">Hørt på Stirsdag</a>
+                        </li>
+                        <li>
+                            <a href="#hvem-staar-bak">Hvem står bak?</a>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
 
-        <section class="section animBg" id="quotes">
-            <div class="section__inner">
-                <h1>Hørt på Stirsdag</h1>
-                <p class="mobileOnly">Ser du deg selv? Trykk på bildet, ta screenshot og del med venner!</p>
-                <ul class="quote-list">
-                    <li>
-                        <img src="./media/profiles/cropped/bjornar.jpg" alt="Bjørnar" />
-                        <div>
-                            <blockquote>Stirsdag er den nye lørdag!</blockquote>
-                            <span>- Bjørnar, Stirsdag 23.06.2017</span>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="./media/profiles/cropped/markus.jpg" alt="Markus" />
-                        <div>
-                            <blockquote>Det dumme med Stirsdag er at man ser så jævla treig ut på Strava.</blockquote>
-                            <span>- Markus, Stirsdag 11.10.2017</span>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="./media/profiles/cropped/hk.jpg" alt="Hans Kristian" />
-                        <div>
-                            <blockquote>Stirsdag er som Fight Club, bare uten slåssinga.</blockquote>
-                            <span>- Hans Kristian, Stirsdag 05.10.2017</span>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="./media/profiles/cropped/phuong.jpg" alt="Phuong" />
-                        <div>
-                            <blockquote>Jeg er bare her for øl og burger</blockquote>
-                            <span>- Phuong, Stirsdag 08.08.2017</span>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="./media/profiles/cropped/steino.jpg" alt="Stein Ove" />
-                        <div>
-                            <blockquote>Jeg må få meg ny jobb så jeg kan være med på hver Stirsdag.</blockquote>
-                            <span>- Stein Ove, Stirsdag 11.10.2017</span>
-                        </div>
-                    </li>
-                    
-                </ul>
-            </div>
-        </section>
+            <section class="section animBg" id="hva-er-stirsdag">
+                <div class="section__inner">
+                    <h1>Hva er Stirsdag?</h1>
+                    <p>Kort oppsummert er Stirsdag tirsdagstreninga til
+                        <a href="#hvem-staar-bak">Sky Blazers</a> hvor alle er velkomne. Vi møtes ved trikkestoppet på Disen, tirsdager kl. 18:00 og
+                        løper opp Grefsenkollen og videre inn i marka før vi ender opp på trikkestasjonen på Kjelsås. </p>
+                    <p>Etterpå tar vi trikken nedover mot Løkka hvor vi tar en matbit og en øl/brus. Høres det fett ut, så bli
+                        med! </p>
+                    <p>Fortsatt ikke 100% solgt? Hr. Rummelhoff har forfattet en litt mer
+                        <a href="https://www.strava.com/athletes/4595507/posts/677173">utdypende tekst om Stirsdag her.</a>
+                    </p>
+                </div>
+            </section>
 
-        <section class="section animBg">
-            <div class="section__inner">
-                <h1>Vi løpes! </h1>
-                <p>Hilsen Sky Blazers & Co.</p>
-                <div class="logo-container">
-                    <div class="logo-container__inner">
-                        <img class="logo" src="media/skyblazerslogo.png" alt="Sky Blazers logo" />
+            <section class="section" id="loypa">
+                <div class="section__inner">
+                    <h1>Løypa</h1>
+                    <div class="map__overlay">
+                        <ul class="map__overlay__actions">
+                            <li>
+                                <a href="./files/Stirsdag.gpx" download="Stirsdag.gpx">Last ned .gpx (449kB) ⏬</a>
+                            </li>
+                            <li>
+                                <a href="https://www.strava.com/activities/1234899120">En tilfeldig Stirsdag på Strava ↗️</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-            </div>
-        </section>
-        
-    </main>
+                <div id="map"></div>
+            </section>
 
-</body>
+            <section class="section animBg" id="utstyr">
+                <div class="section__inner">
+                    <h1>Vær og utstyr</h1>
+                    <p id="weatherText"></p>
+
+                    <table id="gearTable">
+                        <tr>
+                            <th>Plagg/utstyr</th>
+                            <th>God idé?</th>
+                        </tr>
+                        <tbody id="gearTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="section animBg" id="hvem-staar-bak">
+                <div class="section__inner">
+                    <h1>Hvem står bak Stirsdag?</h1>
+                    <p>Stirsdag er et initiativ av løpecrewet Sky Blazers. Vi består av ca 10stk kvinner og menn som rett og
+                        slett elsker å løpe og konkurrere i røfft terreng. Flesteparten av oss holder til i Oslo-området.
+                        "Sky" kommer av at vi digger
+                        <a href="https://en.wikipedia.org/wiki/Skyrunning">skyrunning</a>. "Less cloud, more sky!", som de sier på fagspråket.</p>
+                    <p>Du finner oss i disse kanalene:</p>
+                    <ul>
+                        <li>Facebook:
+                            <a href="https://www.facebook.com/skyblazersrunning/">@skyblazersrunning</a>
+                        </li>
+                        <li>Instagram:
+                            <a href="https://www.instagram.com/skyblazersrunning/">@skyblazersrunning</a>
+                        </li>
+                        <li>Strava:
+                            <a href="https://www.strava.com/clubs/skyblazers">@skyblazers</a>
+                        </li>
+                        <li>Medium:
+                            <a href="https://medium.com/skyblazers">@skyblazers</a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section animBg" id="quotes">
+                <div class="section__inner">
+                    <h1>Hørt på Stirsdag</h1>
+                    <p class="mobileOnly">Ser du deg selv? Trykk på bildet, ta screenshot og del med venner!</p>
+                    <ul class="quote-list">
+                        <li>
+                            <img src="./media/profiles/cropped/bjornar.jpg" alt="Bjørnar" />
+                            <div>
+                                <blockquote>Stirsdag er den nye lørdag!</blockquote>
+                                <span>- Bjørnar, Stirsdag 23.06.2017</span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="./media/profiles/cropped/markus.jpg" alt="Markus" />
+                            <div>
+                                <blockquote>Det dumme med Stirsdag er at man ser så jævla treig ut på Strava.</blockquote>
+                                <span>- Markus, Stirsdag 11.10.2017</span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="./media/profiles/cropped/hk.jpg" alt="Hans Kristian" />
+                            <div>
+                                <blockquote>Stirsdag er som Fight Club, bare uten slåssinga.</blockquote>
+                                <span>- Hans Kristian, Stirsdag 05.10.2017</span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="./media/profiles/cropped/phuong.jpg" alt="Phuong" />
+                            <div>
+                                <blockquote>Jeg er bare her for øl og burger</blockquote>
+                                <span>- Phuong, Stirsdag 08.08.2017</span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="./media/profiles/cropped/steino.jpg" alt="Stein Ove" />
+                            <div>
+                                <blockquote>Jeg må få meg ny jobb så jeg kan være med på hver Stirsdag.</blockquote>
+                                <span>- Stein Ove, Stirsdag 11.10.2017</span>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section animBg">
+                <div class="section__inner">
+                    <h1>Vi løpes! </h1>
+                    <p>Hilsen Sky Blazers & Co.</p>
+                    <div class="logo-container">
+                        <div class="logo-container__inner">
+                            <img class="logo" src="media/skyblazerslogo.png" alt="Sky Blazers logo" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <script src='https://api.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.js'></script>
+        <script src="./js/moment.js" type="text/javascript"></script>
+        <script src="./js/blazing.js" type="text/javascript"></script>
+        <script src="./js/map.js"></script>
+
+    </body>
+
 </html>
