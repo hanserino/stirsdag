@@ -20,10 +20,8 @@
         <meta property="og:image" content="media/headerPics/10.jpg">
         <meta property="og:url" content="http://stirsdag.no/">
 
-        <script src='https://api.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.js'></script>
-        <script src="./moment.js" type="text/javascript"></script>
-        <script src="./blazing.js" type="text/javascript"></script>
-
+        
+        
         <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
         <link rel="stylesheet" href="./stylesheet.css" type="text/css">
 
@@ -31,17 +29,11 @@
 
         <style>
             #map {
-                border: 2px solid black;
                 position: absolute;
                 top: 0;
                 left: 0;
                 bottom: 0;
                 width: 100%;
-            }
-
-            .mapboxgl-popup {
-                max-width: 400px;
-                z-index: 4;
             }
         </style>
 
@@ -92,8 +84,18 @@
             <section class="section" id="loypa">
                 <div class="section__inner">
                     <h1>Løypa</h1>
-                    <div id="map"></div>
+                    <div class="map__overlay">
+                        <ul class="map__overlay__actions">
+                            <li>
+                                <a href="./files/Stirsdag.gpx" download="Stirsdag.gpx">Last ned .gpx (449kB) ⏬</a>
+                            </li>
+                            <li>
+                                <a href="https://www.strava.com/activities/1234899120">En tilfeldig Stirsdag på Strava ↗️</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+                <div id="map"></div>
             </section>
 
             <section class="section animBg" id="utstyr">
@@ -195,154 +197,10 @@
 
         </main>
 
-        <script>
-
-            let centerCords = [10.787729707904333, 59.95273140613864];
-            let zoomLevel = 11.6;
-            let stiLine = [];
-            let ready = false;
-
-            fetch('./stirsdagCoordinates.json').then(function (response) {
-                return response.json().then(function (data) {
-                    coords = data;
-
-                    map.on('load', function () {
-                        map.addLayer({
-                            "id": "route",
-                            "type": "line",
-                            "source": {
-                                "type": "geojson",
-                                "data": {
-                                    "type": "Feature",
-                                    "properties": {},
-                                    "geometry": {
-                                        "type": "LineString",
-                                        "coordinates": coords
-                                    }
-                                }
-                            },
-                            "layout": {
-                                "line-join": "round",
-                                "line-cap": "round"
-                            },
-                            "paint": {
-                                "line-color": "#ff0000",
-                                "line-width": 2
-                            }
-                        });
-                    });
-                });
-            }).catch(error => {
-                console.log(error);
-            });
-
-            mapboxgl.accessToken = 'pk.eyJ1IjoiaGFuc2VyaW5vIiwiYSI6ImNqOHprMWUzZjI3N3czM29icjNlOW1lN2oifQ.SBJSmMYduwt6C_MWPMdelQ';
-
-            var map = new mapboxgl.Map({
-                container: 'map',
-                style: 'mapbox://styles/mapbox/outdoors-v10',
-                center: centerCords,
-                zoom: zoomLevel
-            });
-
-            var markers = {
-                "type": "FeatureCollection",
-                "id": "markers",
-                "features": [
-                    {
-                        "type": "Feature",
-                        "id": "start",
-                        "text": "Disen trikkestopp",
-                        "icon": "🏃‍",
-                        "properties": {
-                            "description": "<h3><strong>Disen trikkestopp</strong></h3><p>Møt opp litt før 18:00, så får du minglet litt.</p><img width=\"300\" src=\"./media/mapPics/disen.jpg\">"
-                        },
-                        "geometry": {
-                            "type": "Point",
-                            "coordinates": [
-                                10.801359,
-                                59.950604
-                            ],
-                        }
-                    },
-                    {
-                        "type": "Feature",
-                        "id": "end",
-                        "text": "Kjelsås trikkestasjon",
-                        "icon": "🏁",
-                        "properties": {
-                            "description": "<h3><strong>Kjelsås</strong></h3><p>Noen stikker hjem mens andre tar trikken ned til <br /> Peloton og tar en øl og pizza.</p><img width=\"300\" src=\"./media/mapPics/kjelsas.jpg\">"
-                        },
-                        "geometry": {
-                            "type": "Point",
-                            "coordinates": [
-                                10.783729,
-                                59.962675
-                            ]
-                        }
-                    },
-                    {
-                        "type": "Feature",
-                        "id": "",
-                        "text": "Peloton",
-                        "icon": "🍕",
-                        "properties": {
-                            "description": "<h3><strong>Pizza og pils på <a href=\"http://pelotonoslo.no/\" target=\"_blank\">Peloton</a></strong></h3><img width=\"300\" src=\"./media/mapPics/peloton.jpg\">"
-                        },
-                        "geometry": {
-                            "type": "Point",
-                            "coordinates": [
-                                10.7543495,
-                                59.9174939
-                            ]
-                        }
-                    }
-                ]
-            };
-
-            markers.features.forEach(function (marker) {
-                // create a DOM element for the marker
-                var el = document.createElement('div');
-                el.className = 'marker';
-                el.innerHTML = marker.icon;
-                el.style.fontSize = "2.5rem";
-                el.style.width = '3rem';
-                el.style.height = '3rem';
-                el.style.lineHeight = '1';
-
-                el.addEventListener('click', function (e) {
-                    popup.setLngLat(marker.geometry.coordinates)
-                        .setHTML(marker.properties.description)
-                        .addTo(map);
-                });
-
-                el.addEventListener('mouseenter', function () {
-                    map.getCanvas().style.cursor = 'pointer';
-                });
-
-                el.addEventListener('mouseleave', function () {
-                    map.getCanvas().style.cursor = '';
-                });
-
-                // add marker to map
-                new mapboxgl.Marker(el)
-                    .setLngLat(marker.geometry.coordinates)
-                    .addTo(map);
-            });
-
-            map.on('click', function (e) {
-                console.log(popup);
-                if(popup){}
-                //popup.remove();
-            });
-
-            var popup = new mapboxgl.Popup({
-                closeButton: true,
-                closeOnClick: false
-            });
-
-        </script>
-
+        <script src='https://api.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.js'></script>
+        <script src="./js/moment.js" type="text/javascript"></script>
+        <script src="./js/blazing.js" type="text/javascript"></script>
+        <script src="./js/map.js"></script>
 
     </body>
 
