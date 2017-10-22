@@ -1,17 +1,4 @@
 
-/**
-    * Map specifics
-    */
-let headerEl = document.getElementById("header");
-let isitAnswerEl = document.getElementById("isitAnswer");
-
-/**
- * Weather specifics
- */
-let degreesEl = document.getElementById("degrees");
-let gearTableBody = document.getElementById("gearTableBody");
-let weatherText = document.getElementById("weatherText");
-
 let forecast = { "data": {} };
 let forecastUrl = 'https://www.yr.no/api/v0/locations/1-73569/forecast';
 
@@ -139,7 +126,7 @@ let daysUntilStirsdag = function (today) {
     if (today === 4) return 4;
     if (today === 5) return 3;
     if (today === 6) return 2;
-    
+
     else {
         return empty;
     }
@@ -151,6 +138,19 @@ function randomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function setBackground(el, picNumber) {
+    el.style.backgroundImage = `url("./media/headerPics/${picNumber}.jpg")`;
+}
+
+function weatherRow(item, goodIdea) {
+    let goodIdeaEmoji = goodIdea ? '👍' : '👎';
+
+    return `<tr>
+                <td>${item}</td>
+                <td>${goodIdeaEmoji}</td>
+            </tr>`;
 }
 
 const answers = {
@@ -165,22 +165,19 @@ const answers = {
     ]
 }
 
-function setBackground(number) {
-    headerEl.style.backgroundImage = `url("media/headerPics/${number}.jpg")`;
-}
-
-function weatherRow(item, goodIdea) {
-    let goodIdeaEmoji = goodIdea ? '👍' : '👎';
-
-    return `<tr>
-                    <td>${item}</td>
-                    <td>${goodIdeaEmoji}</td>
-                </tr>`;
-}
 
 
 function init() {
-    setBackground(randomInt(1, 13));
+    /**
+    * DOM elements
+    */
+    let headerEl = document.getElementById("header");
+    let isitAnswerEl = document.getElementById("isitAnswer");
+    let degreesEl = document.getElementById("degrees");
+    let gearTableBody = document.getElementById("gearTableBody");
+    let weatherText = document.getElementById("weatherText");
+
+    setBackground(headerEl, randomInt(1, 13));
     document.body.setAttribute("data-touch", isTouchDevice());
     headerEl.setAttribute("data-stirsdag", isStirsdag.toString());
 
@@ -278,7 +275,7 @@ function init() {
 /**
  * All things map
  */
-function mapStuff(){
+function mapStuff() {
 
     const map = new mapboxgl.Map(mapOptions);
     const popup = new mapboxgl.Popup(popupOptions);
@@ -348,10 +345,10 @@ function mapStuff(){
 
 window.addEventListener('load', function () {
     console.log('loaded');
-    
+
     init();
     mapStuff();
-    
+
 
 });
 
