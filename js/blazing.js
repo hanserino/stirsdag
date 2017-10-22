@@ -1,78 +1,185 @@
-window.addEventListener('load', function () {
-    let headerEl = document.getElementById("header");
-    let isitAnswerEl = document.getElementById("isitAnswer");
 
-    let degreesEl = document.getElementById("degrees");
-    let gearTableBody = document.getElementById("gearTableBody");
-    let weatherText = document.getElementById("weatherText");
+/**
+    * Map specifics
+    */
+let headerEl = document.getElementById("header");
+let isitAnswerEl = document.getElementById("isitAnswer");
 
-    let forecast = { "data": {} };
-    let forecastUrl = 'https://www.yr.no/api/v0/locations/1-73569/forecast';
+/**
+ * Weather specifics
+ */
+let degreesEl = document.getElementById("degrees");
+let gearTableBody = document.getElementById("gearTableBody");
+let weatherText = document.getElementById("weatherText");
 
-    let date = new Date(),
-        day = date.getDay();
+let forecast = { "data": {} };
+let forecastUrl = 'https://www.yr.no/api/v0/locations/1-73569/forecast';
 
-    let isStirsdag = day === 2 ? true : false;
+/**
+ * Map specifics
+ */
+let centerCords = [10.788729707904333, 59.97173140613864];
+let zoomLevel = 11.8;
+let coords = [];
+const lineColor = "#f83b75";
+const lineWidth = 3;
+let ready = false;
 
-    let isTouchDevice = function () {
-        return (
-            !!(typeof window !== 'undefined' &&
-                ('ontouchstart' in window ||
-                    (window.DocumentTouch &&
-                        typeof document !== 'undefined' &&
-                        document instanceof window.DocumentTouch))) ||
-            !!(typeof navigator !== 'undefined' &&
-                (navigator.maxTouchPoints || navigator.msMaxTouchPoints))
-        );
-    };
+const mapOptions = {
+    container: 'map',
+    style: 'mapbox://styles/mapbox/outdoors-v10',
+    center: [10.788729707904333, 59.97173140613864],
+    zoom: 11.8,
+    scrollZoom: false,
+    closePopupOnClick: true,
+    dragging: false,
+    touchZoom: false,
+    doubleClickZoom: false,
+    scrollWheelZoom: false,
+    keyboard: false,
+};
 
-    let daysUntilStirsdag = function (today) {
-        if (today === 0) return 2;
-        if (today === 1) return 1;
-        if (today === 2) return 0;
-        if (today === 3) return 5;
-        if (today === 4) return 4;
-        if (today === 5) return 3;
-        if (today === 6) return 2;
+const popupOptions = {
+    closeButton: true,
+    closeOnClick: false,
+    autoPan: true,
+    keepInView: true
+}
 
-        else {
-            return empty;
+const markers = {
+    "type": "FeatureCollection",
+    "id": "markers",
+    "features": [
+        {
+            "type": "Feature",
+            "id": "start",
+            "text": "Disen trikkestopp",
+            "icon": "🏃‍",
+            "properties": {
+                "description": "<h3><strong>Disen trikkestopp</strong></h3><p>Møt opp litt før 18:00, så får du minglet litt.</p><img width=\"300\" src=\"./media/mapPics/disen.jpg\">"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.801359,
+                    59.950604
+                ],
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "end",
+            "text": "Kjelsås trikkestasjon",
+            "icon": "🏁",
+            "properties": {
+                "description": "<h3><strong>Kjelsås</strong></h3><p>Noen stikker hjem mens andre tar trikken ned til <br /> Peloton og tar en øl og pizza.</p><img width=\"300\" src=\"./media/mapPics/kjelsas.jpg\">"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.783729,
+                    59.962675
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "",
+            "text": "Peloton",
+            "icon": "🍕",
+            "properties": {
+                "description": "<h3><strong>Pizza og pils på <a href=\"http://pelotonoslo.no/\" target=\"_blank\">Peloton</a></strong></h3><img width=\"300\" src=\"./media/mapPics/peloton.jpg\">"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.7543495,
+                    59.9174939
+                ]
+            }
         }
+    ]
+};
+
+mapboxgl.accessToken = 'pk.eyJ1IjoiaGFuc2VyaW5vIiwiYSI6ImNqOHprMWUzZjI3N3czM29icjNlOW1lN2oifQ.SBJSmMYduwt6C_MWPMdelQ';
+
+
+/**
+ * Date specifics
+ */
+let date = new Date(),
+    day = date.getDay();
+
+
+/**
+ * Other
+ */
+
+//Stirsdag is 2. day of the week
+let isStirsdag = day === 2 ? true : false;
+
+
+let isTouchDevice = function () {
+    return (
+        !!(typeof window !== 'undefined' &&
+            ('ontouchstart' in window ||
+                (window.DocumentTouch &&
+                    typeof document !== 'undefined' &&
+                    document instanceof window.DocumentTouch))) ||
+        !!(typeof navigator !== 'undefined' &&
+            (navigator.maxTouchPoints || navigator.msMaxTouchPoints))
+    );
+};
+
+let daysUntilStirsdag = function (today) {
+    if (today === 0) return 2;
+    if (today === 1) return 1;
+    if (today === 2) return 0;
+    if (today === 3) return 5;
+    if (today === 4) return 4;
+    if (today === 5) return 3;
+    if (today === 6) return 2;
+    
+    else {
+        return empty;
     }
+}
 
-    let nextStirsdagDate = moment(date).locale('nb').add(daysUntilStirsdag(day) + 1, 'days').format('Do MMMM');
+let nextStirsdagDate = moment(date).locale('nb').add(daysUntilStirsdag(day), 'days').format('Do MMMM');
 
-    function randomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min;
-    }
+function randomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+}
 
-    const answers = {
-        yes: [
-            "Jaaaa!!! Vi ses på <a href='https://goo.gl/maps/cuhG4nfLZtM2'>Disen Trikkestopp</a> kl 17:55!",
-            "Hell yeah!!! Vi ses på <a href='https://goo.gl/maps/cuhG4nfLZtM2'>Disen Trikkestopp</a> kl 17:55!"
-        ],
-        no: [
-            "Nope. Ta deg en bolle.",
-            "Nei. Men ta deg en tur i skauen åkke som da, for faen.",
-            "Nei. Kanskje i dag er dagen hvor du skal teste ut HK's famøse <a target='_blank' href='https://medium.com/skyblazers/oppskrift-ultraboller-8eb07c8421ff'>Ultrabolle-oppskrift</a>? 🍪"
-        ]
-    }
+const answers = {
+    yes: [
+        "Jaaaa!!! Vi ses på <a href='https://goo.gl/maps/cuhG4nfLZtM2'>Disen Trikkestopp</a> kl 17:55!",
+        "Hell yeah!!! Vi ses på <a href='https://goo.gl/maps/cuhG4nfLZtM2'>Disen Trikkestopp</a> kl 17:55!"
+    ],
+    no: [
+        "Nope. Ta deg en bolle.",
+        "Nei. Men ta deg en tur i skauen åkke som da, for faen.",
+        "Nei. Kanskje i dag er dagen hvor du skal teste ut HK's famøse <a target='_blank' href='https://medium.com/skyblazers/oppskrift-ultraboller-8eb07c8421ff'>Ultrabolle-oppskrift</a>? 🍪"
+    ]
+}
 
-    function setBackground(number) {
-        headerEl.style.backgroundImage = `url("media/headerPics/${number}.jpg")`;
-    }
+function setBackground(number) {
+    headerEl.style.backgroundImage = `url("media/headerPics/${number}.jpg")`;
+}
 
-    function weatherRow(item, goodIdea) {
-        let goodIdeaEmoji = goodIdea ? '👍' : '👎';
+function weatherRow(item, goodIdea) {
+    let goodIdeaEmoji = goodIdea ? '👍' : '👎';
 
-        return `<tr>
+    return `<tr>
                     <td>${item}</td>
                     <td>${goodIdeaEmoji}</td>
                 </tr>`;
-    }
+}
 
+
+function init() {
     setBackground(randomInt(1, 13));
     document.body.setAttribute("data-touch", isTouchDevice());
     headerEl.setAttribute("data-stirsdag", isStirsdag.toString());
@@ -164,6 +271,87 @@ window.addEventListener('load', function () {
         weatherText.innerHTML = `Noe gikk galt. <a href="tel:004792841558">Ring HK`;
         gearTable.innerHTML = "";
     });
+
+}
+
+
+/**
+ * All things map
+ */
+function mapStuff(){
+
+    const map = new mapboxgl.Map(mapOptions);
+    const popup = new mapboxgl.Popup(popupOptions);
+
+    fetch('./data/stirsdagCoordinates.json').then(function (response) {
+        return response.json().then(function (data) {
+            coords = data;
+
+
+            map.on('load', function () {
+                map.addLayer({
+                    "id": "route",
+                    "type": "line",
+                    "source": {
+                        "type": "geojson",
+                        "data": {
+                            "type": "Feature",
+                            "properties": {},
+                            "geometry": {
+                                "type": "LineString",
+                                "coordinates": coords
+                            }
+                        }
+                    },
+                    "layout": {
+                        "line-join": "round",
+                        "line-cap": "round"
+                    },
+                    "paint": {
+                        "line-color": lineColor,
+                        "line-width": lineWidth
+                    }
+                });
+            });
+        });
+    }).catch(error => {
+        console.log(error);
+    });
+
+    markers.features.forEach(function (marker) {
+        var el = document.createElement('div');
+        el.className = 'marker';
+        el.innerHTML = marker.icon;
+        el.style.fontSize = "2.5rem";
+        el.style.width = '3rem';
+        el.style.height = '3rem';
+        el.style.lineHeight = '1';
+
+        el.addEventListener('click', function (e) {
+            popup.setLngLat(marker.geometry.coordinates)
+                .setHTML(marker.properties.description)
+                .addTo(map);
+        });
+
+        // Adds marker to map
+        new mapboxgl.Marker(el)
+            .setLngLat(marker.geometry.coordinates)
+            .addTo(map);
+    });
+}
+
+
+
+/**
+ * Wait for document ready to fire dom dependent stuf
+ */
+
+window.addEventListener('load', function () {
+    console.log('loaded');
+    
+    init();
+    mapStuff();
+    
 
 });
 
