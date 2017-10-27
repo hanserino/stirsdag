@@ -96,16 +96,12 @@ a:hover{
 }
 
 .section{
-    min-height: 100vh;
     padding: 2rem 1rem;
-    display: flex;
-    flex-direction: column;
-    align-content: center;  
-    position: relative;
 }
 
 .section__inner{
-    max-width: 1000px;
+    max-width: 620px;
+    margin: 0 auto;
     position: relative;
     z-index: 2;
 }
@@ -115,17 +111,13 @@ a:hover{
         padding: 2rem;
     }
 }
-@media (min-width: 900px){
-    .section { 
-        padding: 3rem;
-    }
-}
 
 
 #header{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top center;
+    min-height: 100vh;
 }
 
 .textOnPic {
@@ -382,6 +374,10 @@ blockquote:before {
     display: block;
 }
 
+#loypa{
+    min-height: 95vh;
+    position: relative;
+}
 #loypa h1{ 
     position: relative;
     z-index: 3;
