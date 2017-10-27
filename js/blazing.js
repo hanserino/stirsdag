@@ -119,13 +119,14 @@ let isTouchDevice = function () {
 };
 
 let daysUntilStirsdag = function (today) {
-    if (today === 0) return 2;
-    if (today === 1) return 1;
-    if (today === 2) return 0;
-    if (today === 3) return 5;
-    if (today === 4) return 4;
-    if (today === 5) return 3;
-    if (today === 6) return 2;
+    console.log('today is '+today)
+    if (today === 0) return 3;
+    if (today === 1) return 2;
+    if (today === 2) return 1;
+    if (today === 3) return 6;
+    if (today === 4) return 5;
+    if (today === 5) return 4;
+    if (today === 6) return 3;
 
     else {
         return empty;
@@ -225,14 +226,14 @@ function init() {
             }
 
             if (stirsdagWeather.precipitation.value != undefined) {
-                if (stirsdagWeather.precipitation.value > 5) {
+                if (stirsdagWeather.precipitation.value > 2) {
                     precipText = `Med en nedbørsmengde på ca. <em>${stirsdagWeather.precipitation.value}<abbr title="milimeter">mm</abbr></em> kan dette bli en meget interessant Stirsdag. Kle deg etter forholdene. `;
                 }
                 if ((stirsdagWeather.precipitation.value > 1) && (stirsdagWeather.precipitation.value < 5)) {
                     precipText = `Med en nedbørsmengde på ca. <em>${stirsdagWeather.precipitation.value}<abbr title="milimeter">mm</abbr></em> blir det bittelitt bløtt, så ta med deg regnjakke. `;
                 }
                 if ((stirsdagWeather.precipitation.value < 1) && (stirsdagWeather.precipitation.value > 0)) {
-                    precipText = `Det blir ingen/lite nedbør, så det blir en <em>relativt tørr Stirsdag</em>.`;
+                    precipText = `Det blir muligens litt nedbør, men ikke nok til å frike ut. Ta med deg regnjakke i tilfelle det kommer noen dråper.`;
                 }
                 if (stirsdagWeather.precipitation.value === 0) {
                     precipText = `Det er ikke meldt én eneste dråpe regn, så du kan la paraplyen ligge hjemme.`;
@@ -348,7 +349,6 @@ window.addEventListener('load', function () {
 
     init();
     mapStuff();
-
 
 });
 
