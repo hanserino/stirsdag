@@ -120,7 +120,7 @@ let isTouchDevice = function () {
 
 let daysUntilStirsdag = function (today) {
     console.log('today is '+today)
-    if (today === 0) return 3;
+    if (today === 0) return 2;
     if (today === 1) return 1;
     if (today === 2) return 0;
     if (today === 3) return 6;
