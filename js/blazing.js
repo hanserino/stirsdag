@@ -235,9 +235,9 @@ function init() {
                 if ((stirsdagWeather.precipitation.value < 1) && (stirsdagWeather.precipitation.value > 0)) {
                     precipText = `Det blir muligens litt nedbør, men ikke nok til å frike ut. Ta med deg regnjakke i tilfelle det kommer noen dråper.`;
                 }
-                if (stirsdagWeather.precipitation.value === 0) {
+                /*if (stirsdagWeather.precipitation.value === 0) {
                     precipText = `Det er ikke meldt én eneste dråpe regn, så du kan la paraplyen ligge hjemme.`;
-                }
+                }*/
             }
 
             let willItRain = stirsdagWeather.precipitation > 0 ? true : false;
@@ -255,11 +255,12 @@ function init() {
                 <p>Basert på værmeldingen har vi også generert denne lekre tabellen til deg: </p>
             `;
 
-            gearTableBody.innerHTML += weatherRow('Regntøy', willItRain, willItRain);
+            //gearTableBody.innerHTML += weatherRow('Regntøy', willItRain, willItRain);
+            gearTableBody.innerHTML += weatherRow('<em>Sti</em>longs', willItBeCold, willItBeCold);
             gearTableBody.innerHTML += weatherRow('Splitshorts', !willItBeCold, !willItBeCold);
-            gearTableBody.innerHTML += weatherRow('Terrengsko', true, true);
+            //gearTableBody.innerHTML += weatherRow('Terrengsko', true, true);
             gearTableBody.innerHTML += weatherRow('Hodelykt', true, true);
-            gearTableBody.innerHTML += weatherRow('Piggsko', willitBeSuperCold, willitBeSuperCold);
+            gearTableBody.innerHTML += weatherRow('Piggsko / brådder', willitBeSuperCold, willitBeSuperCold);
             gearTableBody.innerHTML += weatherRow('Solbriller', false, false);
             gearTableBody.innerHTML += weatherRow('Godt humør', true, true);
 
