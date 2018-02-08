@@ -230,14 +230,11 @@ function init() {
                     precipText = `Med en nedbørsmengde på ca. <em>${stirsdagWeather.precipitation.value}<abbr title="milimeter">mm</abbr></em> kan dette bli en meget interessant Stirsdag. Kle deg etter forholdene. `;
                 }
                 if ((stirsdagWeather.precipitation.value > 1) && (stirsdagWeather.precipitation.value < 5)) {
-                    precipText = `Med en nedbørsmengde på ca. <em>${stirsdagWeather.precipitation.value}<abbr title="milimeter">mm</abbr></em> blir det bittelitt bløtt, så ta med deg regnjakke. `;
+                    precipText = `Med en nedbørsmengde på ca. <em>${stirsdagWeather.precipitation.value}<abbr title="milimeter">mm</abbr></em> blir det bittelitt utfordrende, men desto gøyere! (er det et ord?) `;
                 }
                 if ((stirsdagWeather.precipitation.value < 1) && (stirsdagWeather.precipitation.value > 0)) {
-                    precipText = `Det blir muligens litt nedbør, men ikke nok til å frike ut. Ta med deg regnjakke i tilfelle det kommer noen dråper.`;
+                    precipText = `Det blir muligens litt nedbør, men ikke nok til å frike ut.`;
                 }
-                /*if (stirsdagWeather.precipitation.value === 0) {
-                    precipText = `Det er ikke meldt én eneste dråpe regn, så du kan la paraplyen ligge hjemme.`;
-                }*/
             }
 
             let willItRain = stirsdagWeather.precipitation > 0 ? true : false;
