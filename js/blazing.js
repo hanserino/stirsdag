@@ -2,6 +2,9 @@
 let forecast = { "data": {} };
 let forecastUrl = 'https://www.yr.no/api/v0/locations/1-73569/forecast';
 
+let stravaData = {};
+const stravaUrl = "strava.com";
+
 /**
  * Map specifics
  */
@@ -88,8 +91,6 @@ const markers = {
     ]
 };
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiaGFuc2VyaW5vIiwiYSI6ImNqOHprMWUzZjI3N3czM29icjNlOW1lN2oifQ.SBJSmMYduwt6C_MWPMdelQ';
-
 
 /**
  * Date specifics
@@ -104,7 +105,6 @@ let date = new Date(),
 
 //Stirsdag is 2. day of the week
 let isStirsdag = day === 2 ? true : false;
-
 
 let isTouchDevice = function () {
     return (
@@ -172,11 +172,12 @@ function init() {
     /**
     * DOM elements
     */
-    let headerEl = document.getElementById("header");
-    let isitAnswerEl = document.getElementById("isitAnswer");
-    let degreesEl = document.getElementById("degrees");
-    let gearTableBody = document.getElementById("gearTableBody");
-    let weatherText = document.getElementById("weatherText");
+    const headerEl = document.getElementById("header");
+    const isitAnswerEl = document.getElementById("isitAnswer");
+    const degreesEl = document.getElementById("degrees");
+    const gearTableBody = document.getElementById("gearTableBody");
+    const weatherText = document.getElementById("weatherText");
+    const stravaEl = document.getElementById("strava");
 
     setBackground(headerEl, randomInt(1, 13));
     document.body.setAttribute("data-touch", isTouchDevice());
@@ -252,21 +253,34 @@ function init() {
                 <p>Basert på værmeldingen har vi også generert denne lekre tabellen til deg: </p>
             `;
 
-            //gearTableBody.innerHTML += weatherRow('Regntøy', willItRain, willItRain);
-            gearTableBody.innerHTML += weatherRow('<em>Sti</em>longs', willItBeCold, willItBeCold);
-            gearTableBody.innerHTML += weatherRow('Splitshorts', !willItBeCold, !willItBeCold);
-            //gearTableBody.innerHTML += weatherRow('Terrengsko', true, true);
-            gearTableBody.innerHTML += weatherRow('Hodelykt', true, true);
-            gearTableBody.innerHTML += weatherRow('Piggsko / brådder', willitBeSuperCold, willitBeSuperCold);
+            gearTableBody.innerHTML += weatherRow('Regntøy', willItRain, willItRain);
+            gearTableBody.innerHTML += weatherRow('Splitshorts', true, true);
+            gearTableBody.innerHTML += weatherRow('Terrengsko', true, true);
+            gearTableBody.innerHTML += weatherRow('Hodelykt', false, false);
             gearTableBody.innerHTML += weatherRow('Solbriller', false, false);
             gearTableBody.innerHTML += weatherRow('Godt humør', true, true);
 
         });
     }).catch(error => {
         console.log(error);
-        weatherText.innerHTML = `Noe gikk galt. <a href="tel:004792841558">Ring HK`;
+        weatherText.innerHTML = `Noe gikk galt med lastingen av vær-data. <a href="tel:004792841558">Ring HK eller sjekk <a href="https://www.yr.no/nb/oversikt/dag/1-73744/Norge/Oslo/Oslo/Disen">Trollvann på YR.no</a>`;
         gearTable.innerHTML = "";
     });
+
+
+    fetch(stravaData).then(function (response) {
+        return response.json().then(function (data) {
+            stravaData.data = data;
+            let champ = "";
+            
+            console.log(stravaData);
+
+        })
+    }).catch(error => {
+        console.log('strava error ', error);
+        stravaEl.innerHTML = "Hmm.. i dag ser det ut til at Strava sliter med å levere data. Kjipt!"
+    });
+
 
 }
 

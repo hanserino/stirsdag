@@ -48,7 +48,7 @@ body{
 }
 
 h1{
-    font-family: 'Bungee Shade', cursive; 
+    font-family: 'Bungee Shade', Georgia, 'Times New Roman', Times, serif;
     font-size: 3rem;
     margin: 0 0 1rem 0;
     line-height: 1.25;
@@ -406,11 +406,6 @@ blockquote:before {
     }
 }
 
-
-.social{
-    
-}
-
 .social svg{
     width: 1rem;
     height: 1rem;
@@ -437,4 +432,11 @@ blockquote:before {
 
 .social__medium svg{
     fill: #1C1B1A;
+}
+
+
+
+#sidespor{
+    min-height: 95vh;
+    position: relative;
 }
