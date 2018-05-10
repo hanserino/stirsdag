@@ -3,7 +3,10 @@ let forecast = { "data": {} };
 let forecastUrl = 'https://www.yr.no/api/v0/locations/1-73569/forecast';
 
 let stravaData = {};
-const stravaUrl = "strava.com";
+const stravaUrl = "https://www.strava.com/api/v3/athletes/10448277/stats?access_token=004c1253768c9e83f4ed64f2bad715436c35d1fb";
+const sidesporId = "15273787";
+const segmentUrl = "https://www.strava.com/api/v3/segments/15273787/leaderboard?gender=&age_group=&weight_class=&following=&club_id=&date_range=&context_entries=&page=&per_page=004c1253768c9e83f4ed64f2bad715436c35d1fb"
+
 
 /**
  * Map specifics
@@ -90,6 +93,8 @@ const markers = {
         }
     ]
 };
+
+mapboxgl.accessToken = 'pk.eyJ1IjoiaGFuc2VyaW5vIiwiYSI6ImNqOHprMWUzZjI3N3czM29icjNlOW1lN2oifQ.SBJSmMYduwt6C_MWPMdelQ';
 
 
 /**
@@ -267,20 +272,26 @@ function init() {
         gearTable.innerHTML = "";
     });
 
-
-    fetch(stravaData).then(function (response) {
+    fetch(segmentUrl, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }).then(function (response) {
         return response.json().then(function (data) {
-            stravaData.data = data;
-            let champ = "";
-            
-            console.log(stravaData);
-
-        })
+            console.log(data);
+            if (data.ytd_run_totals) {
+                stravaData = data.ytd_run_totals;
+                
+            }
+            else {
+                console.log('no running stats');
+            }
+        });
     }).catch(error => {
-        console.log('strava error ', error);
+        console.log(error);
         stravaEl.innerHTML = "Hmm.. i dag ser det ut til at Strava sliter med å levere data. Kjipt!"
     });
-
 
 }
 

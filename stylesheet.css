@@ -439,4 +439,5 @@ blockquote:before {
 #sidespor{
     min-height: 95vh;
     position: relative;
+    visibility: hidden;
 }
