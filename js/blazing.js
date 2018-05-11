@@ -304,18 +304,16 @@ function init() {
 
                 if(i === 0){
                     stravaEl.innerHTML = `<p>Foreløpig <abbr title="Fastest Known Time">FKT</abbr> ble satt av <em>${entry.athlete_name}</em> ${entry.date_formatted} og lyder på imponerende <em>${entry.time_spent_formatted}</em></p>`;
+                    podiumIcon = `🥇`;
                 }
                 if(i === 1){
-                    podiumIcon = "Champ: "
+                    podiumIcon = `🥈`;
                 }
                 if(i === 2){
-                    podiumIcon = "First loser: "
-                }
-                if(i === 3){
-                    podiumIcon = "Lol: "
+                    podiumIcon = `🥉`;
                 }
 
-                document.getElementById("podium__list").innerHTML += `<li>${podiumIcon}${legendText}</li>`;
+                document.getElementById("podium__list").innerHTML += `<li>${legendText} ${podiumIcon}</li>`;
                 
             }
 

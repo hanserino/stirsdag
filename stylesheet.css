@@ -69,9 +69,13 @@ a{
 em{
     font-weight: bold;
 }
-ul, ol{
+ul {
     padding: 0;
     list-style: none;
+}
+
+ol {
+    padding-left: 2rem;
 }
 
 @media (min-width: 600px){
