@@ -14,7 +14,7 @@ const strava = {
 
 const stravaSegmentUrl = function(segmentId, query){
     const queryString = `${strava.base_url}/segments/${segmentId}/${query}?access_token=${strava.access_token}`;
-    //console.log(queryString);
+    console.log('query string: ', queryString);
     return queryString;
 }
 
@@ -292,14 +292,31 @@ function init() {
     }).then(function (response) {
         return response.json().then(function (data) {
             stravaData.sidespor = data;
-            console.log(stravaData);
+            document.getElementById('sidespor').dataset.stravaDataLoaded = true;
         
-            for (let i = 0; i < 3; ++i) {
-                console.log(stravaData.sidespor.entries[i]);
+            for (let i = 0; i < 10; ++i) {
+                const entry = stravaData.sidespor.entries[i];
+                entry.time_spent_formatted = moment.utc(entry.moving_time*1000).format('mm:ss');
+                entry.date_formatted = moment(entry.start_date_local).locale('nb').format('LLLL');
+
+                let podiumIcon = "";
+                let legendText = `<em>${entry.athlete_name}</em> - (${entry.time_spent_formatted})`;
 
                 if(i === 0){
-                    stravaEl.innerHTML = `<p>${stravaData.sidespor.entries[i].athlete_name}</p>`;
+                    stravaEl.innerHTML = `<p>Foreløpig <abbr title="Fastest Known Time">FKT</abbr> ble satt av <em>${entry.athlete_name}</em> ${entry.date_formatted} og lyder på imponerende <em>${entry.time_spent_formatted}</em></p>`;
                 }
+                if(i === 1){
+                    podiumIcon = "Champ: "
+                }
+                if(i === 2){
+                    podiumIcon = "First loser: "
+                }
+                if(i === 3){
+                    podiumIcon = "Lol: "
+                }
+
+                document.getElementById("podium__list").innerHTML += `<li>${podiumIcon}${legendText}</li>`;
+                
             }
 
         });
@@ -307,6 +324,31 @@ function init() {
         console.log(error);
         stravaEl.innerHTML = "Hmm.. i dag ser det ut til at Strava sliter med å levere data. Kjipt!"
     });
+
+    fetch(stravaSegmentUrl(strava.segments.sidespor, ''), {}).then(function (response) {
+        return response.json().then(function (data) {
+
+            stravaData.sidespor.facts = data;
+
+            const {
+                athlete_count, 
+                average_grade, 
+                distance
+            } = stravaData.sidespor.facts;
+
+            document.getElementById('sidespor__fun-facts').innerHTML = `
+                <h3>Visste du at.. </h3>
+                <ul>
+                    <li><em>${athlete_count}</em> løpere har forsøkt seg på segmentet?</li>
+                    <li>segmentet har en gjennomsnittlig helning på <em>${average_grade}%</em>?</li>
+                    <li>segmentet er <em>${distance}m langt?</em> </li>
+                </ul>
+            `;
+        });
+    }).catch(error => {
+        console.log(error);
+    });
+
 
 }
 
