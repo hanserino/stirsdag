@@ -48,7 +48,7 @@ body{
 }
 
 h1{
-    font-family: 'Bungee Shade', cursive; 
+    font-family: 'Bungee Shade', Georgia, 'Times New Roman', Times, serif;
     font-size: 3rem;
     margin: 0 0 1rem 0;
     line-height: 1.25;
@@ -69,9 +69,13 @@ a{
 em{
     font-weight: bold;
 }
-ul{
+ul {
     padding: 0;
     list-style: none;
+}
+
+ol {
+    padding-left: 2rem;
 }
 
 @media (min-width: 600px){
@@ -182,6 +186,9 @@ a:hover{
 }
 .animBg:nth-child(5){
     animation-delay: -10s;
+}
+.animBg:nth-child(6){
+    animation-delay: -2s;
 }
 
 .animBg:nth-child(even){
@@ -406,11 +413,6 @@ blockquote:before {
     }
 }
 
-
-.social{
-    
-}
-
 .social svg{
     width: 1rem;
     height: 1rem;
@@ -438,3 +440,13 @@ blockquote:before {
 .social__medium svg{
     fill: #1C1B1A;
 }
+
+
+
+#sidespor{
+    min-height: 95vh;
+    position: relative;
+}
+
+[data-strava-data-loaded="false"]{visibility: hidden;}
+[data-strava-data-loaded="true"]{visibility: visible;}

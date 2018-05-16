@@ -2,6 +2,24 @@
 let forecast = { "data": {} };
 let forecastUrl = 'https://www.yr.no/api/v0/locations/1-73569/forecast';
 
+let stravaData = {};
+
+const strava = {
+    "base_url" : "https://www.strava.com/api/v3", 
+    "access_token": "004c1253768c9e83f4ed64f2bad715436c35d1fb",
+    "segments": {
+        "sidespor": "15273787"
+    }
+}
+
+const stravaSegmentUrl = function(segmentId, query){
+    const queryString = `${strava.base_url}/segments/${segmentId}/${query}?access_token=${strava.access_token}`;
+    console.log('query string: ', queryString);
+    return queryString;
+}
+
+
+
 /**
  * Map specifics
  */
@@ -105,7 +123,6 @@ let date = new Date(),
 //Stirsdag is 2. day of the week
 let isStirsdag = day === 2 ? true : false;
 
-
 let isTouchDevice = function () {
     return (
         !!(typeof window !== 'undefined' &&
@@ -172,11 +189,12 @@ function init() {
     /**
     * DOM elements
     */
-    let headerEl = document.getElementById("header");
-    let isitAnswerEl = document.getElementById("isitAnswer");
-    let degreesEl = document.getElementById("degrees");
-    let gearTableBody = document.getElementById("gearTableBody");
-    let weatherText = document.getElementById("weatherText");
+    const headerEl = document.getElementById("header");
+    const isitAnswerEl = document.getElementById("isitAnswer");
+    const degreesEl = document.getElementById("degrees");
+    const gearTableBody = document.getElementById("gearTableBody");
+    const weatherText = document.getElementById("weatherText");
+    const stravaEl = document.getElementById("strava");
 
     setBackground(headerEl, randomInt(1, 13));
     document.body.setAttribute("data-touch", isTouchDevice());
@@ -188,7 +206,7 @@ function init() {
         isitAnswerEl.innerHTML = `
             Nei, i dag er det dessverre bare vanlig ${moment().locale('nb').format('dddd')}. <br>
             Neste Stirsdag er tirsdag ${nextStirsdagDate}.
-            <a href="https://www.facebook.com/pg/skyblazersrunning/events/">Meld deg på her</a>.`;
+            <a href="https://www.facebook.com/events/308897826279982/">Meld deg på her</a> eller bare møt opp.`;
     }
 
     const quoteList = document.getElementsByClassName("quote-list")[0];
@@ -252,21 +270,83 @@ function init() {
                 <p>Basert på værmeldingen har vi også generert denne lekre tabellen til deg: </p>
             `;
 
-            //gearTableBody.innerHTML += weatherRow('Regntøy', willItRain, willItRain);
-            gearTableBody.innerHTML += weatherRow('<em>Sti</em>longs', willItBeCold, willItBeCold);
-            gearTableBody.innerHTML += weatherRow('Splitshorts', !willItBeCold, !willItBeCold);
-            //gearTableBody.innerHTML += weatherRow('Terrengsko', true, true);
-            gearTableBody.innerHTML += weatherRow('Hodelykt', true, true);
-            gearTableBody.innerHTML += weatherRow('Piggsko / brådder', willitBeSuperCold, willitBeSuperCold);
+            gearTableBody.innerHTML += weatherRow('Regntøy', willItRain, willItRain);
+            gearTableBody.innerHTML += weatherRow('Splitshorts', true, true);
+            gearTableBody.innerHTML += weatherRow('Terrengsko', true, true);
+            gearTableBody.innerHTML += weatherRow('Hodelykt', false, false);
             gearTableBody.innerHTML += weatherRow('Solbriller', false, false);
             gearTableBody.innerHTML += weatherRow('Godt humør', true, true);
 
         });
     }).catch(error => {
         console.log(error);
-        weatherText.innerHTML = `Noe gikk galt. <a href="tel:004792841558">Ring HK`;
+        weatherText.innerHTML = `Noe gikk galt med lastingen av vær-data. <a href="tel:004792841558">Ring HK eller sjekk <a href="https://www.yr.no/nb/oversikt/dag/1-73744/Norge/Oslo/Oslo/Disen">Trollvann på YR.no</a>`;
         gearTable.innerHTML = "";
     });
+
+    fetch(stravaSegmentUrl(strava.segments.sidespor, 'leaderboard'), {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }).then(function (response) {
+        return response.json().then(function (data) {
+            stravaData.sidespor = data;
+            document.getElementById('sidespor').dataset.stravaDataLoaded = true;
+        
+            for (let i = 0; i < 10; ++i) {
+                const entry = stravaData.sidespor.entries[i];
+                entry.time_spent_formatted = moment.utc(entry.moving_time*1000).format('mm:ss');
+                entry.date_formatted = moment(entry.start_date_local).locale('nb').format('LLLL');
+
+                let podiumIcon = "";
+                let legendText = `<em>${entry.athlete_name}</em> - (${entry.time_spent_formatted})`;
+
+                if(i === 0){
+                    stravaEl.innerHTML = `<p>Foreløpig <abbr title="Fastest Known Time">FKT</abbr> ble satt av <em>${entry.athlete_name}</em> ${entry.date_formatted} og lyder på imponerende <em>${entry.time_spent_formatted}</em></p>`;
+                    podiumIcon = `🥇`;
+                }
+                if(i === 1){
+                    podiumIcon = `🥈`;
+                }
+                if(i === 2){
+                    podiumIcon = `🥉`;
+                }
+
+                document.getElementById("podium__list").innerHTML += `<li>${legendText} ${podiumIcon}</li>`;
+                
+            }
+
+        });
+    }).catch(error => {
+        console.log(error);
+        stravaEl.innerHTML = "Hmm.. i dag ser det ut til at Strava sliter med å levere data. Kjipt!"
+    });
+
+    fetch(stravaSegmentUrl(strava.segments.sidespor, ''), {}).then(function (response) {
+        return response.json().then(function (data) {
+
+            stravaData.sidespor.facts = data;
+
+            const {
+                athlete_count, 
+                average_grade, 
+                distance
+            } = stravaData.sidespor.facts;
+
+            document.getElementById('sidespor__fun-facts').innerHTML = `
+                <h3>Visste du at.. </h3>
+                <ul>
+                    <li><em>${athlete_count}</em> løpere har forsøkt seg på segmentet?</li>
+                    <li>segmentet har en gjennomsnittlig helning på <em>${average_grade}%</em>?</li>
+                    <li>segmentet er <em>${distance}m langt?</em> </li>
+                </ul>
+            `;
+        });
+    }).catch(error => {
+        console.log(error);
+    });
+
 
 }
 
