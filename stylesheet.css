@@ -187,6 +187,9 @@ a:hover{
 .animBg:nth-child(5){
     animation-delay: -10s;
 }
+.animBg:nth-child(6){
+    animation-delay: -2s;
+}
 
 .animBg:nth-child(even){
     animation-direction: alternate-reverse;    

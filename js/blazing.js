@@ -206,7 +206,7 @@ function init() {
         isitAnswerEl.innerHTML = `
             Nei, i dag er det dessverre bare vanlig ${moment().locale('nb').format('dddd')}. <br>
             Neste Stirsdag er tirsdag ${nextStirsdagDate}.
-            <a href="https://www.facebook.com/pg/skyblazersrunning/events/">Meld deg på her</a>.`;
+            <a href="https://www.facebook.com/events/308897826279982/">Meld deg på her</a> eller bare møt opp.`;
     }
 
     const quoteList = document.getElementsByClassName("quote-list")[0];
