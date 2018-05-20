@@ -1,0 +1,14 @@
+<p class="mobileOnly">Ser du deg selv? Trykk på bildet, ta screenshot og del med venner!</p>
+<ul class="quote-list">
+{% for entry in site.data.quotes %}
+
+{% assign imgurl = '/assets/media/pics/faces' | append: '/' | append: entry.img %}
+<li>
+    <img src={{ imgurl | relative_url}} alt="{{entry.name}}" />
+    <div>
+        <blockquote>{{entry.quote}}</blockquote>
+        <span>- {{entry.name}}, Stirsdag {{entry.date}}</span>
+    </div>
+</li>
+{% endfor %}
+</ul>

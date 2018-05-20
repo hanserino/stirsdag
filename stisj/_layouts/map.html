@@ -1,0 +1,13 @@
+---
+layout: default
+---
+
+<section class="section" id="{{ page.id }}">
+    <div class="section__inner">
+        <h1>{{page.title}}</h1>
+        <div class="map__overlay">
+            {{ content }}
+        </div>
+    </div>
+    <div id="map" style="position: absolute; top: 0; left: 0; bottom: 0; width: 100%;"></div>
+</section>

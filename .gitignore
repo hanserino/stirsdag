@@ -1,0 +1,6 @@
+.sass-cache
+.jekyll-metadata
+docs/feed.xml
+_site
+.idea
+.vscode
