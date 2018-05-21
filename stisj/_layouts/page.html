@@ -4,10 +4,16 @@
   {%- include head.html -%}
 
   <body class="page">
-      <a href="/">Tilbake til Stisj</a>
+    <a href="{{ "/" | relative_url }}"><- stirsdag.no</a>
     <main class="wrapper" aria-label="Content">
       {{ content }}
+      
+      {%- include nav.html -%}
+
     </main>
+    
     {%- include footer.html -%}
+
   </body>
 </html>
+ 

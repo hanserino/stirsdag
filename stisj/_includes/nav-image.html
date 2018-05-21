@@ -1,0 +1,4 @@
+{% assign imgSrc = include.img | append: '.jpg' | relative_url | prepend: '/assets/media/pics/navPics' %}
+{% assign imgAlt = include.alt %}
+
+<img class="nav-image" src="{{ imgSrc }}" alt="{{ imgAlt }}" />

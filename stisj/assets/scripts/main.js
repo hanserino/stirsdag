@@ -75,12 +75,10 @@ const answers = {
     ]
 }
 
-function header(el){    
+function isitStish(el){
     if(el){
-        console.log('header loaded');
+        const isitAnswerEl = document.getElementById("isitAnswer"); 
 
-        const isitAnswerEl = document.getElementById("isitAnswer");
-        setBackground(el, randomInt(1, 13));
         el.setAttribute("data-stirsdag", isStirsdag.toString());
 
         if (isStirsdag) {
@@ -91,6 +89,18 @@ function header(el){
                 Neste Stirsdag er tirsdag ${nextStirsdagDate}.
                 <a href="https://www.facebook.com/events/308897826279982/">Meld deg på her</a> eller bare møt opp.`;
         }
+    }
+}
+
+function header(el){    
+    if(el){
+        console.log('header loaded');
+
+        const isitAnswerEl = document.getElementById("isitAnswer");
+        //setBackground(el, randomInt(1, 13));
+        el.setAttribute("data-stirsdag", isStirsdag.toString());
+
+        
     }
 }
 
@@ -205,6 +215,9 @@ function init() {
 
     //Header suff
     header(document.getElementById("header"));
+
+    //Is it Stish?
+    isitStish(document.getElementById("er-det-stirsdag"));
 
     //Quotes stuff
     quotes(document.getElementsByClassName("quote-list")[0]);
