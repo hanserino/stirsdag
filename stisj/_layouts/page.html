@@ -3,13 +3,10 @@
 
   {%- include head.html -%}
 
-  <body class="page">
-    <a href="{{ "/" | relative_url }}"><- stirsdag.no</a>
+  <body class="page {{ page.id }}">
+    <a href="{{ "/" | relative_url }}">⬅ /</a>
     <main class="wrapper" aria-label="Content">
       {{ content }}
-      
-      {%- include nav.html -%}
-
     </main>
     
     {%- include footer.html -%}

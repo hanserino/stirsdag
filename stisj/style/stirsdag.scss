@@ -26,14 +26,14 @@
 }
 
 body{
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: 'PT Sans', sans-serif;
     font-size: 100%;
     line-height: 1.5;
     font-size: 1.3rem;
 }
 
 h1{
-    font-family: 'Bungee Shade', Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Abril Fatface', cursive;
     font-size: 3rem;
     margin: 0 0 1rem 0;
     line-height: 1.25;
@@ -86,15 +86,25 @@ a:hover{
 
 .section{
     padding: 2rem 1rem;
-    min-height: 95vh;
+    min-height: 85vh;
+    text-align: right;
+
+    &.wide{
+        padding-right: 0;
+        padding-left: 0;
+    }
+
 }
 
-.section__inner,
-.page .footer__inner {
+.section__inner {
     max-width: 620px;
     margin: 0 auto;
     position: relative;
     z-index: 2; 
+}
+
+.wide .section__inner{
+    max-width: 100%;
 }
 
 @media (min-width: 600px){
@@ -106,7 +116,23 @@ a:hover{
 
 
 #header{
-    min-height: 100vh;
+    
+}
+.site-header{
+   
+}
+
+.site-title-container{
+    min-height: 40vh;
+    text-align: right;
+    padding: 1rem;
+    @media (min-width: 500px){
+        padding: 2rem;
+    }
+}
+
+.site-title{
+    
 }
 
 nav{
@@ -117,22 +143,24 @@ nav{
             min-height: 100vh;
         }
     }
+    
     li{
-        border: 1px solid black;
         margin: 0;
+        font-size: 2rem;
         
         @media (min-width: 500px){
             margin: auto;
             flex: 1 auto;
             display: flex;
             justify-content: center;
-            max-width: 50vw;
             width: 50%;
             height: 50vh;
+            font-size: 3rem;
         }
 
         @media (min-width: 880px){
             width: 25%;
+            font-size: 2rem;
         }
     }
 
@@ -144,7 +172,20 @@ nav{
         min-height: 250px;
         overflow: hidden;
         position: relative;
+        border: 2px solid black;
+        background: transparent;
+        transition: all .3s ease-out 0s;
 
+        [data-touch="false"] &:hover {
+            span{
+                background: black;
+                color: white;
+            }
+            img{
+                opacity: .5;
+            }
+
+        }
 
         @media (min-width: 500px){
             height: 100%;
@@ -154,6 +195,8 @@ nav{
     span{
         position: relative;
         z-index: 2;
+        background: white;
+        padding: 0 1rem;
     }
 
     img{
@@ -163,6 +206,8 @@ nav{
         height: 100%;
         left: 0;
         top: 0;
+        transition: transform .25s ease-out 0s;
+        opacity: 1;
     }
 }
 
@@ -200,7 +245,10 @@ table{
     width: 100%;
     border-collapse: collapse; 
     border-spacing: 0;
+    text-align: center;
+    border: 2px solid black;
 }
+
 th,td{
     height: 2.5rem;
     vertical-align: middle;
@@ -216,7 +264,15 @@ td {
 }
 
 #gearTable{
-    max-width: 500px;
+   
+}
+
+#podium{
+    text-align: left;
+}
+
+#podium h2 {
+    font-weight: bold;
 }
 
 
@@ -227,6 +283,7 @@ td {
     flex-direction: column;
     list-style: none;
     font-size: 1rem;
+    text-align: left;
 }
 
 .quote-list li{
@@ -371,6 +428,7 @@ blockquote:before {
     min-height: 95vh;
     position: relative;
 }
+
 #loypa h1{ 
     position: relative;
     z-index: 3;
@@ -402,6 +460,7 @@ blockquote:before {
 .social {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     font-size: 1rem;
     line-height: 1rem;
     margin: 2rem 0;
@@ -463,7 +522,7 @@ blockquote:before {
 .footer{
     font-size: 1rem;
     text-align: center;
-    padding: 4rem;
+    padding: 4rem 0;
 }
 
 .footer__some{
@@ -489,5 +548,86 @@ blockquote:before {
 .footer{
     &__inner{
 
+    }
+}
+
+
+/*
+* Custom colors for each page
+*/
+
+$swatch1: #7CFFF0;
+$swatch2: #ABE80C;
+$swatch3: #FF8B00;
+$swatch4: #E843BC;
+$swatch5: #0043FF;
+
+.nav-link{
+    &__hva-er-stirsdag {
+        [data-touch="false"] &:hover {
+            background: $swatch1;
+        }
+    }
+    &__bilder {
+        [data-touch="false"] &:hover {
+            background: white;
+        }
+    }
+    &__hvem-staar-bak {
+        [data-touch="false"] &:hover {
+            background: $swatch2;
+        }
+    }
+    &__er-det-stirsdag {
+        [data-touch="false"] &:hover {
+            background: $swatch3;
+        }
+    }
+    &__loypa {
+        [data-touch="false"] &:hover {
+            background: $swatch4;
+        }
+    }
+    &__quotes {
+        [data-touch="false"] &:hover {
+            background: $swatch5;
+        }
+    }
+    &__sidespor {
+        [data-touch="false"] &:hover {
+            background: $swatch2;
+        }
+    }
+    &__utstyr {
+        [data-touch="false"] &:hover {
+            background: $swatch2;
+        }
+    }
+}
+
+.page{
+    &.hva-er-stirsdag{
+        background: $swatch1;
+    }
+    &.bilder{
+        background: white;
+    }
+    &.hvem-staar-bak{
+        background: $swatch2;
+    }
+    &.er-det-stirsdag{
+        background: $swatch3;
+    }
+    &.loypa{
+        background: $swatch4;
+    }
+    &.quotes{
+        background: $swatch5;
+    }
+    &.sidespor{
+        background: $swatch2;
+    }
+    &.utstyr{
+        background: $swatch2;
     }
 }

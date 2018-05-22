@@ -1,6 +1,6 @@
 ---
 layout: neutral
-title: Hvem står bak?
+title: Hvem står bak Stirsdag?
 id: hvem-staar-bak
 permalink: /hvem-staar-bak/
 ---

@@ -1,7 +1,7 @@
 <header class="site-header" role="banner" id="header">
-    {%- assign default_paths = site.pages | map: "path" -%}
-    {%- assign page_paths = site.header_pages | default: default_paths -%}
-
+    <div class="site-title-container">
+        <h1 class="site-title">{{ site.title }}</h1>
+        <p class="site-description">{{ site.description }}</p>
+    </div>
     {%- include nav.html -%}
 </header>
-
