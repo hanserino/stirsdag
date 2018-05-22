@@ -93,6 +93,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiaGFuc2VyaW5vIiwiYSI6ImNqOHprMWUzZjI3N3czM29ic
  */
 function map(el) {
     if(el){
+        console.log(el);
         
         const map = new mapboxgl.Map(mapOptions);
         const popup = new mapboxgl.Popup(popupOptions);

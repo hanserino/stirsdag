@@ -89,6 +89,13 @@ a:hover{
     min-height: 85vh;
     text-align: right;
 
+    &__inner{
+        max-width: 620px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2; 
+    }
+
     &.wide{
         padding-right: 0;
         padding-left: 0;
@@ -96,21 +103,33 @@ a:hover{
 
 }
 
-.section__inner {
-    max-width: 620px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 2; 
+.wide {
+    .section__inner{
+        max-width: 100%;
+    }
+    .section__header {
+        padding: 0 2rem;
+    }
 }
 
-.wide .section__inner{
-    max-width: 100%;
-}
 
 @media (min-width: 600px){
     .section, 
     .footer {
         padding: 2rem;
+    }
+}
+
+.back-btn{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    display: none;
+    padding: .5rem;
+
+    @media (min-width: 500px){
+        display: block;
     }
 }
 
@@ -159,7 +178,7 @@ nav{
         }
 
         @media (min-width: 880px){
-            width: 25%;
+            width: 33.3333333%;
             font-size: 2rem;
         }
     }
@@ -269,6 +288,8 @@ td {
 
 #podium{
     text-align: left;
+
+
 }
 
 #podium h2 {
@@ -527,8 +548,9 @@ blockquote:before {
 
 .footer__some{
     position: relative;
+
     abbr {
-        color: white;
+        color: rgba(255,255,255, .4);
         position: absolute;
         top: 4rem;
         display: block;
@@ -536,6 +558,7 @@ blockquote:before {
         left: 0;
         z-index: 2;
         font-weight: bold;
+        display: none;
     }
 }
 
@@ -543,6 +566,7 @@ blockquote:before {
     font-size: 20rem;
     line-height: 20rem;
     color: black;
+    display: none;
 }
 
 .footer{
@@ -558,9 +582,9 @@ blockquote:before {
 
 $swatch1: #7CFFF0;
 $swatch2: #ABE80C;
-$swatch3: #FF8B00;
-$swatch4: #E843BC;
-$swatch5: #0043FF;
+$swatch3: rgb(0, 233, 136);
+$swatch4: rgb(255, 61, 203);
+$swatch5: rgb(255, 182, 47);
 
 .nav-link{
     &__hva-er-stirsdag {
@@ -585,7 +609,7 @@ $swatch5: #0043FF;
     }
     &__loypa {
         [data-touch="false"] &:hover {
-            background: $swatch4;
+            background: white;
         }
     }
     &__quotes {
@@ -619,7 +643,7 @@ $swatch5: #0043FF;
         background: $swatch3;
     }
     &.loypa{
-        background: $swatch4;
+        background: white;
     }
     &.quotes{
         background: $swatch5;
