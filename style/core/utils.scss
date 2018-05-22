@@ -1,0 +1,44 @@
+// Mobile-first media query helper
+@mixin media($bp) {
+    @media screen and (min-width: #{$bp}) {
+      @content;
+    }
+  }
+  
+  //Uses .no-touch and .touch 
+  //classes on <body> element
+  //based on js touch device test
+  @mixin hover($nested){
+    @if $nested {
+      .no-touch &{
+        &:hover {
+          @content;
+        }
+      }
+    } @else{
+      .no-touch {
+        &:hover {
+          @content;
+        }
+      }
+    }
+  }
+
+  
+  //Mixins for media queries
+  //Refers to the $breakpoints object in _variables.scss
+  
+  //Example usage:
+  //@include allAbove(phone){ styles go here.. }
+  @mixin allAbove($size){
+    @media screen and (min-width: map-get($breakpoints, $size)){
+      @content; 
+    }
+  }
+  
+  @mixin allBelow($size){
+    @media screen and (max-width: map-get($breakpoints, $size)){
+      @content; 
+    }
+  }
+  

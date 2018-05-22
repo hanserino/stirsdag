@@ -1,0 +1,32 @@
+[
+    {
+        "img": "markus.jpg",
+        "name": "Markus",
+        "quote": "Det dumme med Stirsdag er at man ser så jævla treig ut på Strava.",
+        "date": "11.10.2017"
+    },
+    {
+        "img": "bjornar.jpg",
+        "name": "Bjørnar",
+        "quote": "Stirsdag er den nye lørdag!",
+        "date": "23.06.2017"
+    },
+    {
+        "img": "hk.jpg",
+        "name": "Hans Kristian",
+        "quote": "Stirsdag er som Fight Club, bare uten slåssinga.",
+        "date": "05.10.2017"
+    },
+    {
+        "img": "phuong.jpg",
+        "name": "Phuong",
+        "quote": "Jeg er bare her for øl og burger",
+        "date": "08.08.2017"
+    },
+    {
+        "img": "steino.jpg",
+        "name": "Stein Ove",
+        "quote": "Jeg må få meg ny jobb så jeg kan være med på hver Stirsdag.",
+        "date": "11.10.2017"
+    }
+]
