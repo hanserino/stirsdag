@@ -4,3 +4,5 @@ docs/feed.xml
 _site
 .idea
 .vscode
+.sass-cache
+.jekyll-metadata
