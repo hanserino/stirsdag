@@ -86,6 +86,7 @@ a:hover{
 
 .section{
     padding: 2rem 1rem;
+    min-height: 95vh;
 }
 
 .section__inner,
@@ -113,7 +114,7 @@ nav{
         @media (min-width: 500px){
             display: flex;
             flex-flow: row wrap;
-            height: 100vh;
+            min-height: 100vh;
         }
     }
     li{
@@ -126,8 +127,12 @@ nav{
             display: flex;
             justify-content: center;
             max-width: 50vw;
-            width: 25%;
+            width: 50%;
             height: 50vh;
+        }
+
+        @media (min-width: 880px){
+            width: 25%;
         }
     }
 
@@ -394,16 +399,37 @@ blockquote:before {
     }
 }
 
+.social {
+    display: flex;
+    justify-content: center;
+    font-size: 1rem;
+    line-height: 1rem;
+    margin: 2rem 0;
+}
+
+.social li{
+    margin: 0;
+}
+
 .social svg{
     width: 1rem;
     height: 1rem;
 }
 
 .social a{
-    padding: 2px .5rem 2px 0;
+    padding: .5rem;
+    display: block;
+   
 }
+
 .social a > span{
     margin: 0 .25rem 0 0;
+}
+
+
+.social svg {
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .social a:hover svg{
@@ -434,8 +460,30 @@ blockquote:before {
 [data-strava-data-loaded="true"]{visibility: visible;}
 
 
-.page .footer{
+.footer{
+    font-size: 1rem;
+    text-align: center;
+    padding: 4rem;
+}
 
+.footer__some{
+    position: relative;
+    abbr {
+        color: white;
+        position: absolute;
+        top: 4rem;
+        display: block;
+        width: 100%;
+        left: 0;
+        z-index: 2;
+        font-weight: bold;
+    }
+}
+
+.some-arrow{
+    font-size: 20rem;
+    line-height: 20rem;
+    color: black;
 }
 
 .footer{
