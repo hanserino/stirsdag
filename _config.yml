@@ -25,8 +25,6 @@ slogan: bedre enn lørdag
 # Build settings
 markdown: kramdown
 destination: ./docs
-plugins:
-  - jekyll-feed
 
 google_analytics: UA-107726023-1
 
