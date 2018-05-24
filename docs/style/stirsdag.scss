@@ -531,11 +531,6 @@ blockquote:before {
     fill: #1C1B1A;
 }
 
-#sidespor{
-    min-height: 95vh;
-    position: relative;
-}
-
 [data-strava-data-loaded="false"]{visibility: hidden;}
 [data-strava-data-loaded="true"]{visibility: visible;}
 
@@ -575,13 +570,69 @@ blockquote:before {
     }
 }
 
+.sidespor .section{
+    text-align: left;
+
+    h1{
+        text-align: right;
+    }
+    
+} 
+
+.sidespor__fun-facts{
+    margin: 4rem 0;
+
+    ul{
+        margin: 1rem 0;
+    }
+
+    &-img{
+        border-radius: 50%;
+        height: auto;
+        max-width: 8rem;
+
+        @media (min-width: 800px) {
+            max-width: 12rem;
+        }
+    }
+}
+
+
+#sidespor__fun-facts-text{
+	position: relative;
+	background: #ffffff;
+    border-radius: .4em;
+    padding: 1rem;
+    display: inline-block;
+    font-style: italic;
+}
+
+#sidespor__fun-facts-text:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 5rem;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-bottom-color: #ffffff;
+	border-top: 0;
+	border-left: 0;
+	margin-left: -10px;
+    margin-top: -20px;
+
+    @media (min-width: 800px){
+        left: 8rem;
+
+    }
+}
 
 /*
 * Custom colors for each page
 */
 
 $swatch1: #7CFFF0;
-$swatch2: #ABE80C;
+$swatch2: rgb(12, 232, 159);
 $swatch3: rgb(0, 233, 136);
 $swatch4: rgb(255, 61, 203);
 $swatch5: rgb(255, 182, 47);
