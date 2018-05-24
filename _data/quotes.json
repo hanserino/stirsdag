@@ -1,5 +1,11 @@
 [
     {
+        "img": "erika.jpg",
+        "name": "Erika",
+        "quote": "Nå er det elleville dager i Marka",
+        "date": "22.05.2018"
+    },
+    {
         "img": "markus.jpg",
         "name": "Markus",
         "quote": "Det dumme med Stirsdag er at man ser så jævla treig ut på Strava.",
