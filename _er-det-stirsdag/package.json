@@ -1,15 +1,17 @@
 {
   "name": "er-det-stirsdag",
   "version": "1.0.0",
-  "description": "er det stirsdag?",
+  "description": "Er det stirsdag?",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-packager . --overwrite --platform=darwin --icon \"app_icons/Icon.icns\" --arch=x64 --prune=true --out=release-builds"
   },
-  "author": "",
+  "author": "Hans Kristian Smedsrød",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^2.0.2"
+    "electron": "^2.0.2",
+    "electron-packager": "^12.1.0"
   },
   "dependencies": {
     "moment": "^2.22.1"
