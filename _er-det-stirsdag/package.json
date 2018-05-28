@@ -1,5 +1,6 @@
 {
   "name": "er-det-stirsdag",
+  "productName": "Stirsdags-appen",
   "version": "1.0.0",
   "description": "Er det stirsdag?",
   "main": "main.js",
