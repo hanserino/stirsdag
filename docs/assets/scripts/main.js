@@ -15,9 +15,6 @@ let date = new Date(),
     day = date.getDay();
 
 
-/**
- * Other
- */
 
 //Stirsdag is 2. day of the week
 let isStirsdag = day === 2 ? true : false;

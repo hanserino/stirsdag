@@ -1,96 +1,116 @@
-const electron = require('electron')
-const moment = require('moment');
-
-// Module to control application life.
-const app = electron.app
-
-// Module to create native browser window.
-const BrowserWindow = electron.BrowserWindow
-
-// Electron-modul for å sende data mellom filer
-const ipcMain = electron.ipcMain
-
-//Electron-modul for å bygge app-topp-menyen
-const Menu = electron.Menu
-
 //Node native stuff
 const path = require('path')
 const url = require('url')
 const fs = require('fs');
 
+//3rd party node modules
+const electron = require('electron')
+const moment = require('moment');
+
 //Custom modules
 const isit = require('./modules/isit');
 const daysUntilStirsdag = require('./modules/daysUntilStirsdag');
+const dayBender = require('./modules/dayBender');
 const stirsHtml = require('./modules/stirsHtml');
 
-const todayFormatted = moment().locale('nb').format('dddd');
+//Electron modules
+const app = electron.app
+const BrowserWindow = electron.BrowserWindow
+const Notification = electron.Notification
+const ipcMain = electron.ipcMain
+const Menu = electron.Menu
 
 const date = new Date(),
-    today = date.getDay();
+      today = date.getDay();
+
+const weekday = moment().locale('nb').format('dddd');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+let stirsdagsNoty, 
+  allOtherDaysNoty,
+  autoLauncher;
 
-const nextStirsdagDate = moment(date).locale('nb').add(daysUntilStirsdag(today), 'days').format('Do MMMM');
-const isStirsdag = isit(daysUntilStirsdag(daysUntilStirsdag(today), today));
+const nextStirsdagDate = moment(date).locale('nb').add(daysUntilStirsdag(today), 'days');
+
+const nextStirsdagDatePretty = moment(nextStirsdagDate).calendar(null ,{
+  lastDay : '[i går]',
+  sameDay : '[i dag]',
+  nextDay : '[i morgen]',
+  lastWeek : '[forrige] dddd',
+  nextWeek : 'dddd',
+  sameElse : 'L'
+})
+
+const isStirsdag = isit(daysUntilStirsdag(today));
+
+
+
 
 function createWindow () {
-  // Create the browser window.
-  mainWindow = new BrowserWindow({width: 1200, height: 900})
 
-  // and load the index.html of the app.
+  mainWindow = new BrowserWindow({
+    width: 700, 
+    height: 500
+  })
+
+  // Lload the index.html of the app.
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
     slashes: true
   }))
+  
+  stirsdagsNoty = new Notification({
+    title: "I dag er det Blazing Stirsdag!",
+    subtitle: "Disen trikkestopp kl 18:00. Fordi du fortjener det.",
+    closeButtonText: "Notert!"
+  })
 
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  allOtherDaysNoty = new Notification({
+    title: "Hold ut!",
+    subtitle: `I dag er det bare ${daysUntilStirsdag(today)} ${dayBender(daysUntilStirsdag(today))} igjen til Stirsdag!`,
+    closeButtonText: "Fett!"
+  })
 
+
+  if(isStirsdag){
+    stirsdagsNoty.show()
+  }else{
+    allOtherDaysNoty.show()
+  }
 
   ipcMain.on('isStirsdag', (event, arg) => {
     event.returnValue = isStirsdag;
   });
 
   ipcMain.on('htmlFromBackend', (event, arg) => {
-    event.returnValue = `hei og hå`;
+    event.returnValue = stirsHtml(isStirsdag, weekday, nextStirsdagDatePretty);
   })
+
 
   
 
-
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
     mainWindow = null
   })
+
+
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {
     app.quit()
   }
 })
 
 app.on('activate', function () {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {
     createWindow()
   }
 })
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
