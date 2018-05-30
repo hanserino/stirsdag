@@ -43,10 +43,7 @@ const nextStirsdagDatePretty = moment(nextStirsdagDate).calendar(null ,{
   sameElse : 'L'
 })
 
-const isStirsdag = isit(daysUntilStirsdag(today));
-
-
-
+const isStirsdag = isit(today);
 
 function createWindow () {
 

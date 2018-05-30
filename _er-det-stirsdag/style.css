@@ -51,8 +51,7 @@ h1{
 [data-is-stirsdag="true"] #manifester{
     position: absolute;
     top: 50%;
-    left: 2rem;
-    
+    left: 5rem;
     font-size: 2rem;
     transform-origin: 50% 50%;
     animation: pump 250ms ease-in-out infinite alternate-reverse;
