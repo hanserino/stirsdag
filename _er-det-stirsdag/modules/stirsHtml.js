@@ -2,7 +2,7 @@ const stirsHtml = function(isStirsdag, weekday, nextStirsdagDate){
     let html = "";
 
     if (isStirsdag) {
-      html `AAAAAAYEEEEEAH!`;
+      html = `HEEELLL YEEEEEAHH!!!`;
     } else {
         html = `
             Nei, i dag er det dessverre bare vanlig ${weekday}. <br />
