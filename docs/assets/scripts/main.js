@@ -190,7 +190,7 @@ function forecast(el){
                 gearTableBody.innerHTML += weatherRow('Regntøy', willItRain, willItRain);
                 gearTableBody.innerHTML += weatherRow('Splitshorts', true, true);
                 gearTableBody.innerHTML += weatherRow('Terrengsko', true, true);
-                gearTableBody.innerHTML += weatherRow('Hodelykt', false, false);
+                gearTableBody.innerHTML += weatherRow('Hodelykt', true, true);
                 gearTableBody.innerHTML += weatherRow('Solbriller', false, false);
                 gearTableBody.innerHTML += weatherRow('Godt humør', true, true);
 
