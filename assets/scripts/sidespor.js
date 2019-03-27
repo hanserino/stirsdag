@@ -12,7 +12,7 @@ const strava = {
     "base_url" : "https://www.strava.com/api/v3", 
     "access_token": "004c1253768c9e83f4ed64f2bad715436c35d1fb",
     "segments": {
-        "sidespor": "15273787"
+        "sidespor": "19952893"
     },
 }
 
