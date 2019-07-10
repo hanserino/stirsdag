@@ -12,7 +12,7 @@ const strava = {
     "base_url" : "https://www.strava.com/api/v3", 
     "access_token": "004c1253768c9e83f4ed64f2bad715436c35d1fb",
     "segments": {
-        "sidespor": "15273787"
+        "sidespor": "19952893"
     },
 }
 
@@ -50,6 +50,8 @@ function sidespor(el){
             
                 for (let i = 0; i < 10; ++i) {
                     const entry = stravaData.sidespor.entries[i];
+
+                    console.log(entry);
                     
                     entry.time_spent_formatted = moment.utc(entry.moving_time*1000).format('mm:ss');
                     entry.date_formatted = moment(entry.start_date_local).locale('nb').subtract(2, 'hour').calendar();

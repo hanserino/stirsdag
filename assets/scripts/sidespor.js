@@ -50,6 +50,8 @@ function sidespor(el){
             
                 for (let i = 0; i < 10; ++i) {
                     const entry = stravaData.sidespor.entries[i];
+
+                    console.log(entry);
                     
                     entry.time_spent_formatted = moment.utc(entry.moving_time*1000).format('mm:ss');
                     entry.date_formatted = moment(entry.start_date_local).locale('nb').subtract(2, 'hour').calendar();
