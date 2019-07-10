@@ -83,7 +83,8 @@ function isitStish(el){
         } else {
             isitAnswerEl.innerHTML = `
                 Nei, i dag er det dessverre bare vanlig ${moment().locale('nb').format('dddd')}. <br>
-                Neste Stirsdag er tirsdag ${nextStirsdagDate}.`;
+                Neste Stirsdag er tirsdag ${nextStirsdagDate}. <br>
+                Og forresten.. det heter Stirsdag, ikke sti-tirsdag. Oppfattet?`;
         }
     }
 }
