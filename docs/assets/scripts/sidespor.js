@@ -10,7 +10,7 @@ let stravaData = {
 
 const strava = {
     "base_url" : "https://www.strava.com/api/v3", 
-    "access_token": "004c1253768c9e83f4ed64f2bad715436c35d1fb",
+    "access_token": "8f6fbd7d6072dd3366163e21650348b0c67eb0e0",
     "segments": {
         "sidespor": "19952893"
     },
@@ -44,6 +44,7 @@ function sidespor(el){
             }
         }).then(function (response) {
             return response.json().then(function (data) {
+                console.log(data);
 
                 stravaData.sidespor = data;
                 el.dataset.stravaDataLoaded = true;
