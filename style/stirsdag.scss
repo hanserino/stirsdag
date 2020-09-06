@@ -39,6 +39,13 @@ h1{
     line-height: 1.25;
 }
 
+h2,h3 {
+    font-weight: bold;
+}
+
+h2 {
+    margin-top: 2rem;
+}
 
 p{
     margin: 1rem 0;
@@ -102,7 +109,7 @@ a:hover{
 .section{
     padding: 2rem 1rem;
     min-height: 85vh;
-    text-align: right;
+    //text-align: right;
 
     &__inner{
         max-width: 620px;
@@ -158,7 +165,7 @@ a:hover{
 
 .site-title-container{
     min-height: 40vh;
-    text-align: right;
+    //text-align: right;
     padding: 1rem;
     @media (min-width: 500px){
         padding: 2rem;
@@ -583,7 +590,7 @@ blockquote:before {
     text-align: left;
 
     h1{
-        text-align: right;
+        //text-align: right;
     }
     
 } 
@@ -605,6 +612,7 @@ blockquote:before {
         }
     }
 }
+
 
 
 #sidespor__fun-facts-text{
@@ -689,6 +697,9 @@ $swatch5: rgb(255, 182, 47);
     }
 }
 
+.hva-er-stirsdag{
+    
+}
 .page{
     &.hva-er-stirsdag{
         background: $swatch1;
