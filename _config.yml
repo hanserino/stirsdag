@@ -16,7 +16,8 @@
 title: Stirsdag
 email: eplehans@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Stiløping for de som er i noenlunde bra form. Lillomarka. Oslo. Fast runde. 12km. 550 høydemeter. Hver tirsdag. Hele året. 
+  Stiløping for de som er i noenlunde bra form. Lillomarka. Oslo. Fast runde. 12km. 550 høydemeter. Hver tirsdag. Hele året.
+  Covid-19 og smittevern: Du må være frisk, vi er maks 20 som løper om gangen og vi holder minst 2 meters avstand til hverandre. Unngå spytting, hosting eller neseutblåsing nær andre.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://stirsdag.no" # the base hostname & protocol for your site, e.g. http://example.com
 seo_keywords: Terrengløping, Oslo, Stiløping, Trail running, Sky Blazers
