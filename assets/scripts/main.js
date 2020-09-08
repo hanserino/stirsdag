@@ -62,13 +62,13 @@ function setBackground(el, picNumber) {
 
 const answers = {
     yes: [
-        "Jaaaa!!! Vi ses på <a href='https://goo.gl/maps/cuhG4nfLZtM2'>Disen Trikkestopp</a> kl 17:55!",
-        "Hell yeah!!! Vi ses på <a href='https://goo.gl/maps/cuhG4nfLZtM2'>Disen Trikkestopp</a> kl 17:55!"
+        "Jaaaaaa!!!!",
+        "Fuck yeah!!!!"
     ],
     no: [
         "Nope. Ta deg en bolle.",
-        "Nei. Men ta deg en tur i skauen åkke som da, for faen.",
-        "Nei. Kanskje i dag er dagen hvor du skal teste ut HK's famøse <a target='_blank' href='https://medium.com/skyblazers/oppskrift-ultraboller-8eb07c8421ff'>Ultrabolle-oppskrift</a>? 🍪"
+        "Nei. Men ikke la dette hindre deg i å ta deg en tur i Lillomarka.",
+        "Nei. Sorry!!!"
     ]
 }
 
@@ -82,9 +82,9 @@ function isitStish(el){
             isitAnswerEl.innerHTML = answers.yes[randomInt(0, answers.yes.length)];
         } else {
             isitAnswerEl.innerHTML = `
-                Nei, i dag er det dessverre bare vanlig ${moment().locale('nb').format('dddd')}. <br>
+                Nei, i dag er det dessverre bare ${moment().locale('nb').format('dddd')}. <br>
                 Neste Stirsdag er tirsdag ${nextStirsdagDate}. <br>
-                Og forresten.. det heter Stirsdag, ikke sti-tirsdag. Oppfattet?`;
+                Og forresten... det heter Stirsdag, ikke sti-tirsdag. Oppfattet?`;
         }
     }
 }
