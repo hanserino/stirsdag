@@ -168,7 +168,7 @@ a:hover{
     //text-align: right;
     padding: 1rem;
     @media (min-width: 500px){
-        padding: 2rem;
+        padding: 3rem 2rem;
     }
 }
 
@@ -730,10 +730,17 @@ $swatch5: rgb(255, 182, 47);
 
 
 .booking-btn{
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 1rem;
+    display: block;
+    padding: 1rem 2rem;
     background: green;
     color: white;
+}
+
+@media (min-width: 600px){
+    .booking-btn{
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
 }
