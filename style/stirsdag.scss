@@ -165,7 +165,6 @@ a:hover{
 
 .site-title-container{
     min-height: 40vh;
-    //text-align: right;
     padding: 1rem;
     @media (min-width: 500px){
         padding: 3rem 2rem;
@@ -731,7 +730,7 @@ $swatch5: rgb(255, 182, 47);
 
 .booking-btn{
     display: block;
-    padding: 1rem 2rem;
+    padding: 1rem;
     background: green;
     color: white;
 }
@@ -742,5 +741,6 @@ $swatch5: rgb(255, 182, 47);
         position: absolute;
         top: 0;
         right: 0;
+        padding: 1rem 2rem;
     }
 }
