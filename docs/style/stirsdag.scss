@@ -700,6 +700,7 @@ $swatch5: rgb(255, 182, 47);
 .hva-er-stirsdag{
     
 }
+
 .page{
     &.hva-er-stirsdag{
         background: $swatch1;
@@ -725,4 +726,14 @@ $swatch5: rgb(255, 182, 47);
     &.utstyr{
         background: $swatch2;
     }
+}
+
+
+.booking-btn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    background: green;
+    color: white;
 }
