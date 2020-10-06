@@ -730,7 +730,7 @@ $swatch5: rgb(255, 182, 47);
 
 .booking-btn{
     display: block;
-    padding: 1rem 2rem;
+    padding: 1rem;
     background: green;
     color: white;
 }
@@ -741,5 +741,6 @@ $swatch5: rgb(255, 182, 47);
         position: absolute;
         top: 0;
         right: 0;
+        padding: 1rem 2rem;
     }
-}
+}  
