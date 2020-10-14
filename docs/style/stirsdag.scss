@@ -694,6 +694,11 @@ $swatch5: rgb(255, 182, 47);
             background: $swatch2;
         }
     }
+    &__larp {
+        [data-touch="false"] &:hover {
+            background: pink;
+        }
+    }
 }
 
 .hva-er-stirsdag{
@@ -724,6 +729,9 @@ $swatch5: rgb(255, 182, 47);
     }
     &.utstyr{
         background: $swatch2;
+    }
+    &.larp{
+        background: pink;
     }
 }
 
