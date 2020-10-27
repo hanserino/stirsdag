@@ -5,4 +5,5 @@ id: er-det-stirsdag
 permalink: /er-det-stirsdag/
 ---
 
-<p id="isitAnswer"></p>
+<p>Nei, dessverre. Pga COVID-19 dropper vi det. </p>
+<!--<p id="isitAnswer"></p>-->
