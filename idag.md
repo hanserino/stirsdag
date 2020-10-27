@@ -6,4 +6,4 @@ permalink: /er-det-stirsdag/
 ---
 
 <p>Nei, dessverre. Pga COVID-19 dropper vi det. </p>
-<!--<p id="isitAnswer"></p>-->
+<!--<p id="isitAnswer"></p>--> 
