@@ -10,7 +10,7 @@ let stravaData = {
 
 const strava = {
     "base_url" : "https://www.strava.com/api/v3", 
-    "access_token": "8f6fbd7d6072dd3366163e21650348b0c67eb0e0",
+    "access_token": "91943ecfe9823c7ea97933805b9c731fd899bd9e",
     "segments": {
         "sidespor": "19952893"
     },
@@ -19,7 +19,7 @@ const strava = {
 const stravaSegmentUrl = function(segmentId, query){
     let queryString = "";
 
-    if(segmentId && query){
+    if(segmentId && query){ 
         console.log('segment id and query');
         queryString = `${strava.base_url}/segments/${segmentId}/${query}?access_token=${strava.access_token}`;
     } else {
