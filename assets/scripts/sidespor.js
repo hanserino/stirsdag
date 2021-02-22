@@ -10,13 +10,13 @@ let stravaData = {
 
 const strava = {
     "base_url" : "https://www.strava.com/api/v3", 
-    "access_token": "91943ecfe9823c7ea97933805b9c731fd899bd9e",
+    "access_token": "87e7699a89e86a06aea14f2c66b6b86a2b9e7473",
     "segments": {
         "sidespor": "19952893"
     },
 }
 
-const stravaSegmentUrl = function(segmentId, query){
+const stravaSegmentUrl = function(segmentId, query){ 
     let queryString = "";
 
     if(segmentId && query){ 
@@ -34,52 +34,8 @@ const stravaSegmentUrl = function(segmentId, query){
 function sidespor(el){
     if(el){
         const leaderTextEl = document.getElementById("sidespor__leader-text");
-        const podiumEl = document.getElementById("sidespor__podium-list");
         const funFactsEl = document.getElementById('sidespor__fun-facts-text');
-
-        fetch(stravaSegmentUrl(strava.segments.sidespor, 'leaderboard'), {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        }).then(function (response) {
-            return response.json().then(function (data) {
-                console.log(data);
-
-                stravaData.sidespor = data;
-                el.dataset.stravaDataLoaded = true;
-            
-                for (let i = 0; i < 10; ++i) {
-                    const entry = stravaData.sidespor.entries[i];
-
-                    console.log(entry);
-                    
-                    entry.time_spent_formatted = moment.utc(entry.moving_time*1000).format('mm:ss');
-                    entry.date_formatted = moment(entry.start_date_local).locale('nb').subtract(2, 'hour').calendar();
-
-                    let podiumIcon = "";
-                    let legendText = `<em>${entry.athlete_name}</em> - (${entry.time_spent_formatted})`;
-    
-                    if(i === 0){
-                        leaderTextEl.innerHTML = `<p>Foreløpig <abbr title="Fastest Known Time">FKT</abbr> ble satt av <em>${entry.athlete_name}</em> ${entry.date_formatted} og lyder på imponerende <em>${entry.time_spent_formatted}</em>. Omg for en legende!!!</p>`;
-                        podiumIcon = `🥇`;
-                    }
-                    if(i === 1){
-                        podiumIcon = `🥈`;
-                    }
-                    if(i === 2){
-                        podiumIcon = `🥉`;
-                    }
-    
-                    podiumEl.innerHTML += `<li>${legendText} ${podiumIcon}</li>`;
-                    
-                }
-    
-            });
-        }).catch(error => {
-            console.log(error);
-            el.innerHTML = "Hmm.. i dag ser det ut til at Strava sliter med å levere data. Kjipt!"
-        });
+        const xomEl = document.getElementById("sidespor__xoms");
 
         fetch(stravaSegmentUrl(strava.segments.sidespor), {
             headers: {
@@ -89,30 +45,39 @@ function sidespor(el){
         }).then(function (response) {
             
             return response.json().then(function (data) {
-                
+                el.dataset.stravaDataLoaded = true;
+
                 stravaData.sidespor.facts = data;
 
-                console.log('data: ', data);
+                console.log('sidespor-data: ', data);
     
                 const {
                     athlete_count, 
                     average_grade, 
-                    distance
+                    distance,
+                    xoms
                 } = stravaData.sidespor.facts;
 
-                
+   
+
                 if(funFactsEl){
                     funFactsEl.innerHTML = `
                         <h3>Hei! Det er jeg som er Bjørnar. Visste du at.. </h3>
                         <ul>
-                            <li><em>${athlete_count}</em> løpere har forsøkt seg på segmentet mitt?</li>
+                            <li>Løyperekorden er på utrolige <em>${xoms.kom}</em> sekunder!?</li>
+                            <li>Segmentet er blitt løpt <em>${athlete_count}</em> ganger?</li>
                             <li>Det har en gjennomsnittlig helning på <em>${average_grade}%</em>?</li>
-                            <li>Segmentet er <em>${distance}m langt?</em> </li>
+                            <li>Segmentet er <em>${distance}m langt?</em></li>
+                            <li>Sidesporet er såpass kjent at det er blitt anerkjent av <a href="https://www.gaiagps.com/hike/trail/norway/oslo/maridalen-landskapsvernomr%C3%A5de/bj%C3%B8rnars-flyvende-sidespor/">Gaia GPS?</a></li>
                         </ul>
+
+                        <p>Klikk deg inn på <a href="https://www.strava.com/segments/19952893">leaderboardet på Strava</a> for flere fun facts.</p>
                         
                         <p>Lykke til!</p>
                     `;
                 }
+
+
             });
         }).catch(error => {
             console.log(error);
