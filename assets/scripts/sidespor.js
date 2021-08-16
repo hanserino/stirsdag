@@ -10,7 +10,7 @@ let stravaData = {
 
 const strava = {
     "base_url" : "https://www.strava.com/api/v3", 
-    "access_token": "87e7699a89e86a06aea14f2c66b6b86a2b9e7473",
+    "access_token": "fe64983d06d5ef9aff3531ddeda1bd850aada28a",
     "segments": {
         "sidespor": "19952893"
     },
