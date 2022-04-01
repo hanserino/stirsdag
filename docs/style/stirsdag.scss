@@ -2,17 +2,17 @@
 @charset "utf-8";
 
 // Vendor -------------- //
-@import 'lib/reset';
-@import 'lib/mapbox'; 
-@import 'lib/helpers'; 
+@import "lib/reset";
+@import "lib/mapbox"; 
+@import "lib/helpers"; 
 
 // Core -------------- //
-@import 'core/vars';
-@import 'core/utils'; 
+@import "core/vars";
+@import "core/utils"; 
 
 
 // The rest -------------- //
-@import 'core/vars';
+@import "core/vars";
 
 
 [data-touch="false"] .mobileOnly { 
@@ -109,7 +109,6 @@ a:hover{
 .section{
     padding: 2rem 1rem;
     min-height: 85vh;
-    //text-align: right;
 
     &__inner{
         max-width: 620px;
@@ -137,7 +136,7 @@ a:hover{
 
 @media (min-width: 600px){
     .section, 
-    .footer {
+    .footer{
         padding: 2rem;
     }
 }
@@ -164,7 +163,6 @@ a:hover{
 }
 
 .site-title-container{
-    min-height: 40vh;
     padding: 1rem;
     @media (min-width: 500px){
         padding: 3rem 2rem;
@@ -522,7 +520,7 @@ blockquote:before {
 }
 
 
-.social svg {
+.social svg {
     display: inline-block;
     vertical-align: middle;
 }
@@ -624,7 +622,7 @@ blockquote:before {
 }
 
 #sidespor__fun-facts-text:after {
-	content: '';
+	content: "";
 	position: absolute;
 	top: 0;
 	left: 5rem;

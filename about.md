@@ -9,11 +9,6 @@ Kort oppsummert er Stirsdag tirsdagstreninga til Sky Blazers. Vi møtes i den st
 
 Vanligvis starter vi presis kl 18, men nå kan det være vi sprer oss mer på flere tidspunkt der noen starter før. Det er derfor lurt å komme i god tid. 
 
-## Covid-19
-Grunnet situasjonen med Covid-19 har vi en grense på at maks 20 personer er samlet av gangen. Det betyr at dersom 20 personer er kommet, starter de å løpe. Nr 21 osv må vente noen minutter og løper da i neste gruppe.
-
-Ellers gjelder generelle regler som at du må være frisk uten symptomer som kan relateres til Covid-19, vi holder minst 2 meters avstand til hverandre og vi unngår spytting, hosting eller neseutblåsing nær andre.  
-
 ## FAQ:
 ### Hvor bra form må jeg være i for å kunne fullføre Stirsdag?
 Du må kunne løpe uanstrengt opp til Grefsenkollen. Om du ikke klarer å henge med opp dit anbefaler vi at du tar en alternativ rute og kommer tilbake når du er i litt bedre form. Det siste vi vil er at noen blir skadet eller pusher seg for hardt og må avbryte Stirsdag langt inne i skogen.
