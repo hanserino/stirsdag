@@ -10,4 +10,4 @@ permalink: /vaer-og-utstyr/
 Enkelt førstehjelpsutstyr som enkeltmannspakke er obligatorisk. Ta gjerne med noe plaster, strips og sårvask også. 
 
 ## Vurder å ta med dette: 
-Hodelykt, tørt skift og varme klær til etter løpingen, drikke, næring og GPX-rute på klokka.
+Vannflaske, GPS-klokke og BCAA-tabletter. 
