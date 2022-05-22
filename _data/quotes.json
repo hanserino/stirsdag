@@ -34,5 +34,17 @@
         "name": "Stein Ove",
         "quote": "Jeg må få meg ny jobb så jeg kan være med på hver Stirsdag.",
         "date": "11.10.2017"
+    },
+    {
+        "img": "bjornar-2.jpg",
+        "name": "Bjørnar",
+        "quote": "Det er to steder du ikke vil være sulten. I  matbutikken og på Stirsdag.",
+        "date": "10.05.2022"
+    },
+    {
+        "img": "francesca.jpg",
+        "name": "Francesca",
+        "quote": "Det beste med mandag er at det er Stirsdag dagen etter.",
+        "date": "10.05.2022"
     }
 ]
