@@ -45,6 +45,12 @@ h2,h3 {
 
 h2 {
     margin-top: 2rem;
+    font-size: 2rem;
+}
+
+h3 {
+    margin-top: 2rem;
+    font-size: 1.85rem;
 }
 
 p{
@@ -705,7 +711,7 @@ $swatch5: rgb(255, 182, 47);
 
 .page{
     &.hva-er-stirsdag{
-        background: $swatch1;
+        background: white;
     }
     &.bilder{
         background: white;
