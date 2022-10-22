@@ -37,16 +37,16 @@ const markers = {
         {
             "type": "Feature",
             "id": "start",
-            "text": "Disen trikkestopp",
+            "text": "Møteplass: Statuen til Laila Schou Nilsen",
             "icon": "🏃‍",
             "properties": {
-                "description": "<h3><strong>Disen trikkestopp</strong></h3><p>Møt opp litt før 18:00, så får du minglet litt.</p><img width=\"300\" src=\"/assets/media/pics/mapPics/disen.jpg\">"
+                "description": "<h3><strong>Laila Schou Nilsen</strong></h3><p>Møt opp litt før 18:00, så får du minglet litt med de andre før toget går.</p><img width=\"300\" src=\"/assets/media/pics/mapPics/laila.jpg\">"
             },
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    10.801359,
-                    59.950604
+                    10.78960483675896,
+                    59.946334264867964
                 ],
             }
         },
@@ -56,7 +56,7 @@ const markers = {
             "text": "Kjelsås trikkestasjon",
             "icon": "🏁",
             "properties": {
-                "description": "<h3><strong>Kjelsås</strong></h3><p>Noen stikker hjem mens andre tar trikken ned til <br /> Peloton og tar en øl og pizza.</p><img width=\"300\" src=\"/assets/media/pics/mapPics/kjelsas.jpg\">"
+                "description": "<h3><strong>Kjelsås Trikkestasjon</strong></h3><p>Her avsluttes Stirsdag Classic. Noen ganger tar vi en matbit etterpå. Andre ganger ikke. </p><img width=\"300\" src=\"/assets/media/pics/mapPics/kjelsas.jpg\">"
             },
             "geometry": {
                 "type": "Point",
