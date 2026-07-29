@@ -7,7 +7,7 @@ permalink: /loypa/
 
 <ul class="map__overlay__actions">
     <li>
-        <a href="{{ "/downloads/Stirsdag-om-Kampen.gpx" | relative_url }}" download="Stirsdag.gpx">Last ned .gpx (49kB) ⏬</a>
+        <a href="{{ "/downloads/stirsdag-om-kampen-til-kjelsas.gpx" | relative_url }}" download="Stirsdag.gpx">Last ned .gpx (49kB) ⏬</a>
     </li>
     <li>
         <a href="https://oslosti.no/stil%C3%B8ping-fra-disen-til-kjels%C3%A5s-697c60f2e2b0" target="_blank">Rutebeskrivelse av den opprinnelige løypa fra 2017 på oslosti.no ↗️</a>
