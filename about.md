@@ -15,7 +15,7 @@ Sti + tirsdag = Stirsdag <3
 Parken ovenfor Disen trikkestasjon. Google Maps: Stirsdag samlingspunkt
 
 ### Når skal jeg komme?
-Løpestart er kl 18 presis. Kom noen minutter før for kort informasjon om dagens økt, spesielt om du er ny. 
+Løpestart er kl 18 presis. Kom noen minutter før for kort informasjon om dagens økt, spesielt om du er ny.
 
 ### Hvor langt løper dere? 
 Fra Disen til Langsettløkka på Kjelsås er det ca. 10,5 km og 500 høydemeter. Den faste runden kaller vi Stirsdag om Kampen, og vi bruker omtrent 1 time og 45 minutter til Langsettløkka.

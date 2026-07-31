@@ -85,6 +85,20 @@ const markers = {
     ]
 };
 
+const routeGpxUrl = '/downloads/stirsdag-om-kampen-til-kjelsas.gpx';
+
+function parseGpxCoordinates(gpxText) {
+    const doc = new DOMParser().parseFromString(gpxText, 'application/xml');
+    const points = doc.querySelectorAll('trkpt');
+
+    return Array.from(points).map(function (point) {
+        return [
+            parseFloat(point.getAttribute('lon')),
+            parseFloat(point.getAttribute('lat'))
+        ];
+    });
+}
+
 mapboxgl.accessToken = 'pk.eyJ1IjoiaGFuc2VyaW5vIiwiYSI6ImNqOHprMWUzZjI3N3czM29icjNlOW1lN2oifQ.SBJSmMYduwt6C_MWPMdelQ';
 
 
@@ -98,9 +112,9 @@ function map(el) {
         const map = new mapboxgl.Map(mapOptions);
         const popup = new mapboxgl.Popup(popupOptions);
 
-        fetch('/assets/data/coordinates.json').then(function (response) {
-            return response.json().then(function (data) {
-                coords = data;
+        fetch(routeGpxUrl).then(function (response) {
+            return response.text().then(function (gpxText) {
+                coords = parseGpxCoordinates(gpxText);
 
                 map.on('load', function () {
                     map.addLayer({

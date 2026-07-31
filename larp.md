@@ -3,6 +3,7 @@ layout: larp
 title: Stirsdag LARP
 id: larp
 permalink: /larp/
+nav: false
 ---
 
 Stirsdag LARP (Live Action Role Play) er for den som har gått seg lei av det klassiske Stirsdag-formatet og vil oppleve noe nytt på den samme gamle stien. 
