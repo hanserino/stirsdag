@@ -56,7 +56,7 @@ Noen ganger deler vi oss opp i flere grupper underveis.
 - Enkeltmannspakke/ bandasje med kompress for å stoppe blødninger - viktig!
 - Elastisk bandasje hvis overtråkk - anbefales  
 - Hodelykt hvis det blir mørkt i løpet av runden
-- Piggsko eller bratter hvis is og glatt føre
+- Piggsko eller brodder hvis is og glatt føre
 - Håndkle eller skift hvis du vil bade underveis eller etterpå (det går også fint uten dette)
 - Varmt skift hvis det blir pizza etter turen
 
